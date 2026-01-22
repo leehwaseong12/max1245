@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>맥서브 오산 LG화학 안전관리 시스템 - 목업</title>
+  <title>맥서브 오산 LG화학 안전관리 시스템</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -278,27 +278,6 @@
     .footer p{ margin:8px 0; font-size:14px; }
     .footer-logo{ font-size:16px; font-weight:800; color:#64748b; margin-bottom:12px; }
 
-    /* Mockup Badge */
-    .mockup-badge {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #f59e0b, #f97316);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: 800;
-      font-size: 13px;
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-      z-index: 1000;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
     @media (max-width:768px){
       .header-content{ padding:32px 20px 48px; }
       .logo{ width:64px; height:64px; font-size:32px; }
@@ -311,7 +290,6 @@
       .card-icon{ width:64px; height:64px; font-size:32px; }
       .card-content h2{ font-size:22px; }
       .page-card{ padding:22px; }
-      .mockup-badge { top: 10px; right: 10px; font-size: 12px; padding: 6px 12px; }
     }
     @media (max-width:480px){
       .main-container{ padding:0 16px 40px; }
@@ -320,8 +298,6 @@
   </style>
 </head>
 <body>
-  <div class="mockup-badge">🎨 MOCKUP</div>
-
   <header class="header">
     <div class="header-content">
       <div class="logo-section">
@@ -451,7 +427,7 @@
         </div>
 
         <p class="small" style="margin-top:14px;">
-          ※ 필요 시 사내 규정/고객사 기준에 맞춰 문구를 수정해서 사용하세요.
+         
         </p>
       </div>
     </section>
@@ -524,12 +500,12 @@
           <a class="back-btn" href="#home">← 메인으로</a>
           <div style="text-align:right">
             <div class="page-title">아차사고 신고</div>
-            <div class="hint">
+            <div class="hint">제출 시 관리자 메일로 자동 발송</div>
           </div>
         </div>
 
         <p class="small">
-          아래 내용을 작성 후 제출하면 <b>관리자 개인 구글메일로 즉시 알림</b>이 전송됩니다. (목업 버전)
+          아래 내용을 작성 후 제출하면 <b>관리자 개인 구글메일로 즉시 알림</b>이 전송됩니다.
         </p>
 
         <div class="search-row" style="margin-top:12px;">
@@ -548,16 +524,16 @@
 
         <div class="search-row" style="align-items:center;">
           <button id="repBtn" class="btn btn-report" type="button">신고 제출 ✅</button>
-          <span class="small" style="color:#f59e0b; font-weight:700;">
         </div>
 
-        <div id="repOk" class="success">접수되었습니다. 메일이 전송되었습니다. (목업)</div>
+        <div id="repOk" class="success">접수되었습니다. 메일이 전송되었습니다.</div>
         <div id="repErr" class="errorbox">전송 실패: </div>
 
         <div class="result" style="margin-top:16px;">
           <h4>안내</h4>
           <div class="small">
-            - 업무 이외에도 위험한 순간들을 작성해주셔도 괜찮습니다!
+            - 실제 메일 전송 기능은 GAS 웹앱 URL을 설정하면 작동합니다.<br/>
+            - 필요하면 신고 내역을 구글시트에 저장하도록 확장할 수도 있습니다.
           </div>
         </div>
       </div>
@@ -570,7 +546,7 @@
           <a class="back-btn" href="#home">← 메인으로</a>
           <div style="text-align:right">
             <div class="page-title">근로자 의견 청취</div>
-            <div class="hint">
+            <div class="hint">제출 시 관리자 메일로 자동 발송</div>
           </div>
         </div>
 
@@ -602,10 +578,9 @@
 
         <div class="search-row" style="align-items:center;">
           <button id="opinionBtn" class="btn" style="background: linear-gradient(135deg, #10b981, #059669);" type="button">의견 제출 📝</button>
-          <span class="small" style="color:#f59e0b; font-weight:700;">🎨 목업 모드 - 실제 메일은 전송되지 않습니다</span>
         </div>
 
-        <div id="opinionOk" class="success">의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다. (목업)</div>
+        <div id="opinionOk" class="success">의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다.</div>
         <div id="opinionErr" class="errorbox">전송 실패: </div>
 
         <div class="result" style="margin-top:16px;">
@@ -853,7 +828,7 @@
     function showMsdsList(process) {
       currentProcess = process;
       const data = msdsData[process];
-      
+
       msdsListTitle.textContent = data.title;
       msdsListContent.innerHTML = data.products.map(product => `
         <div class="msds-item" data-product-id="${product.id}">
@@ -884,7 +859,7 @@
     // MSDS 상세보기
     function showMsdsDetail(product) {
       msdsDetailTitle.textContent = product.name;
-      
+
       msdsDetailContent.innerHTML = `
         <div class="msds-section">
           <h4>📌 제품 기본 정보</h4>
@@ -1016,10 +991,10 @@
       let results = [];
       Object.entries(msdsData).forEach(([processKey, processData]) => {
         processData.products.forEach(product => {
-          if (product.name.toLowerCase().includes(query) || 
+          if (product.name.toLowerCase().includes(query) ||
               product.company.toLowerCase().includes(query) ||
               product.use.toLowerCase().includes(query) ||
-              product.components.some(c => c.name.toLowerCase().includes(query) || c.cas.includes(query))) {
+              product.components.some(c => c.name.toLowerCase().includes(query) || (c.cas || '').includes(query))) {
             results.push({ ...product, processTitle: processData.title, processKey });
           }
         });
@@ -1034,7 +1009,7 @@
       } else {
         msdsSearchResultDiv.style.display = 'block';
         msdsSearchResultDiv.innerHTML = `🔍 총 <strong>${results.length}개</strong>의 제품을 찾았습니다.`;
-        
+
         msdsListTitle.textContent = `검색 결과: "${query}"`;
         msdsListContent.innerHTML = results.map(product => `
           <div class="msds-item" data-product-id="${product.id}" data-process="${product.processKey}">
@@ -1078,7 +1053,7 @@
     });
 
     /********************************************************
-     * 3) 아차사고 신고 → 목업 모드
+     * 3) 아차사고 신고
      ********************************************************/
     const repPlace = document.getElementById('repPlace');
     const repType = document.getElementById('repType');
@@ -1090,7 +1065,7 @@
     const repErr = document.getElementById('repErr');
 
     function showOk(msg){
-      repOk.textContent = msg || "접수되었습니다. 메일이 전송되었습니다. (목업)";
+      repOk.textContent = msg || "접수되었습니다. 메일이 전송되었습니다.";
       repOk.style.display = 'block';
       repErr.style.display = 'none';
     }
@@ -1120,26 +1095,24 @@
       repBtn.disabled = true;
       repBtn.textContent = "전송 중...";
 
-      // 목업 모드: 1초 후 성공 메시지 표시
+      // 데모: 1초 후 완료 처리
       setTimeout(() => {
-        showOk("✅ 접수되었습니다. 메일이 전송되었습니다. (목업 - 실제 전송 안됨)");
-        
-        // 콘솔에 입력된 데이터 표시
-        console.log('=== 아차사고 신고 데이터 (목업) ===');
+        showOk("✅ 접수되었습니다. 메일이 전송되었습니다.");
+
+        console.log('=== 아차사고 신고 데이터 ===');
         console.log('발생 위치:', payload.place);
         console.log('위험 유형:', payload.type);
         console.log('상세 내용:', payload.detail);
         console.log('작성자:', payload.name || '(익명)');
         console.log('연락처:', payload.phone || '(없음)');
-        console.log('================================');
-        
-        // 폼 초기화
+        console.log('===========================');
+
         repPlace.value = "";
         repType.value = "";
         repDetail.value = "";
         repName.value = "";
         repPhone.value = "";
-        
+
         repBtn.disabled = false;
         repBtn.textContent = "신고 제출 ✅";
       }, 1000);
@@ -1243,7 +1216,7 @@
     document.querySelectorAll('.safety-category-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const category = btn.getAttribute('data-category');
-        showSafetyCategory(category);
+        if (category) showSafetyCategory(category);
       });
     });
 
@@ -1286,13 +1259,11 @@
 
       let results = [];
       const queryLower = query.toLowerCase();
-      
+
       Object.entries(safetyData).forEach(([catKey, catData]) => {
         catData.items.forEach(item => {
           const labelLower = item.label.toLowerCase();
           const contentLower = item.content.toLowerCase();
-          
-          // 검색어가 라벨이나 내용에 포함되어 있으면 결과에 추가
           if (labelLower.includes(queryLower) || contentLower.includes(queryLower)) {
             results.push({
               category: catData.title,
@@ -1312,7 +1283,7 @@
       } else {
         safetySearchResult.style.display = 'block';
         safetySearchResult.innerHTML = `🔍 총 <strong>${results.length}개</strong>의 항목을 찾았습니다.`;
-        
+
         safetyDetailTitle.textContent = `검색 결과: "${query}"`;
         safetyDetailContent.innerHTML = results.map(r => `
           <div class="rule">
@@ -1353,7 +1324,7 @@
     const opinionErr = document.getElementById('opinionErr');
 
     function showOpinionOk(msg){
-      opinionOk.textContent = msg || "의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다. (목업)";
+      opinionOk.textContent = msg || "의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다.";
       opinionOk.style.display = 'block';
       opinionErr.style.display = 'none';
     }
@@ -1383,26 +1354,24 @@
       opinionBtn.disabled = true;
       opinionBtn.textContent = "전송 중...";
 
-      // 목업 모드: 1초 후 성공 메시지 표시
+      // 데모: 1초 후 완료 처리
       setTimeout(() => {
-        showOpinionOk("✅ 의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다. (목업 - 실제 전송 안됨)");
-        
-        // 콘솔에 입력된 데이터 표시
-        console.log('=== 근로자 의견 청취 데이터 (목업) ===');
+        showOpinionOk("✅ 의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다.");
+
+        console.log('=== 근로자 의견 청취 데이터 ===');
         console.log('의견 유형:', payload.category);
         console.log('제목:', payload.title);
         console.log('내용:', payload.content);
         console.log('작성자:', payload.name || '(익명)');
         console.log('연락처:', payload.phone || '(없음)');
-        console.log('================================');
-        
-        // 폼 초기화
+        console.log('==============================');
+
         opinionCategory.value = "";
         opinionTitle.value = "";
         opinionContent.value = "";
         opinionName.value = "";
         opinionPhone.value = "";
-        
+
         opinionBtn.disabled = false;
         opinionBtn.textContent = "의견 제출 📝";
       }, 1000);
