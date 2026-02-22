@@ -30,8 +30,7 @@
     .logo{ 
       width:72px; height:72px; display:flex; align-items:center; justify-content:center;
       background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      border-radius: 16px;
-      font-size: 36px;
+      border-radius: 16px; font-size: 36px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
     .company-info{ color:#fff; }
@@ -51,9 +50,37 @@
     .view{ display:none; }
     .view.active{ display:block; }
 
-    /* Menu grid */
+    /* ─── 공지사항 배너 (홈에 노출되는 미리보기) ─── */
+    .notice-banner {
+      background:#fff; border-radius:20px; padding:20px 24px;
+      box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.03);
+      margin-bottom:24px; cursor:pointer;
+      border-left: 5px solid #f59e0b;
+      transition: all .3s ease;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .notice-banner:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0,0,0,.1);
+    }
+    .notice-banner-left { display:flex; align-items:center; gap:14px; flex:1; min-width:0; }
+    .notice-bell { font-size:28px; flex-shrink:0; }
+    .notice-banner-texts { min-width:0; }
+    .notice-banner-label {
+      font-size:12px; font-weight:800; color:#92400e;
+      background:#fef3c7; border:1px solid #fbbf24;
+      padding:3px 10px; border-radius:999px; display:inline-block; margin-bottom:6px;
+    }
+    .notice-banner-title {
+      font-size:16px; font-weight:700; color:#0f172a;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .notice-banner-date { font-size:13px; color:#94a3b8; margin-top:2px; }
+    .notice-banner-arrow { font-size:22px; color:#94a3b8; flex-shrink:0; }
+
+    /* ─── 메뉴 그리드 ─── */
     .menu-grid{
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
       gap:24px; margin-bottom:40px;
     }
     .menu-card{
@@ -69,16 +96,16 @@
       content:''; position:absolute; top:0; left:0; right:0; height:5px;
       transition: all .4s ease;
     }
-    .menu-card.safety::before{ background: linear-gradient(90deg, #8b5cf6, #6366f1); }
-    .menu-card.msds::before  { background: linear-gradient(90deg, #ec4899, #ef4444); }
-    .menu-card.report::before{ background: linear-gradient(90deg, #06b6d4, #3b82f6); }
-    .menu-card.opinion::before{ background: linear-gradient(90deg, #10b981, #059669); }
+    .menu-card.safety::before  { background: linear-gradient(90deg, #8b5cf6, #6366f1); }
+    .menu-card.msds::before    { background: linear-gradient(90deg, #ec4899, #ef4444); }
+    .menu-card.report::before  { background: linear-gradient(90deg, #06b6d4, #3b82f6); }
+    .menu-card.opinion::before { background: linear-gradient(90deg, #10b981, #059669); }
+    .menu-card.notice::before  { background: linear-gradient(90deg, #f59e0b, #ef4444); }
 
     .menu-card:hover{
       transform: translateY(-8px);
       box-shadow: 0 20px 40px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
     }
-    .menu-card:hover::before{ height:100%; opacity:.03; }
     .menu-card:focus-visible{ outline:3px solid rgba(99,102,241,.55); outline-offset:4px; }
 
     .card-icon{
@@ -86,32 +113,29 @@
       display:flex; align-items:center; justify-content:center;
       font-size:36px; transition: all .4s ease;
       box-shadow:0 4px 12px rgba(0,0,0,.08);
-      user-select:none;
     }
-    .menu-card.safety .card-icon{ background: linear-gradient(135deg, #8b5cf6, #6366f1); }
-    .menu-card.msds .card-icon  { background: linear-gradient(135deg, #ec4899, #ef4444); }
-    .menu-card.report .card-icon{ background: linear-gradient(135deg, #06b6d4, #3b82f6); }
-    .menu-card.opinion .card-icon{ background: linear-gradient(135deg, #10b981, #059669); }
-    .menu-card:hover .card-icon{ transform: scale(1.1) rotate(-5deg); }
+    .menu-card.safety .card-icon  { background: linear-gradient(135deg, #8b5cf6, #6366f1); }
+    .menu-card.msds .card-icon    { background: linear-gradient(135deg, #ec4899, #ef4444); }
+    .menu-card.report .card-icon  { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+    .menu-card.opinion .card-icon { background: linear-gradient(135deg, #10b981, #059669); }
+    .menu-card.notice .card-icon  { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+    .menu-card:hover .card-icon   { transform: scale(1.1) rotate(-5deg); }
 
-    .card-content h2{ font-size:24px; font-weight:700; color:#1e293b; margin-bottom:12px; letter-spacing:-.5px; }
-    .card-content p{ font-size:15px; color:#64748b; line-height:1.6; margin-bottom:16px; }
-    .card-features{ display:flex; flex-wrap:wrap; gap:8px; }
-    .feature-tag{
-      padding:6px 14px; background:#f1f5f9; border-radius:20px;
-      font-size:13px; color:#475569; font-weight:500;
-    }
+    .card-content h2{ font-size:22px; font-weight:700; color:#1e293b; margin-bottom:10px; letter-spacing:-.5px; }
+    .card-content p { font-size:14px; color:#64748b; line-height:1.6; }
+
     .card-arrow{
       margin-top:auto; display:flex; align-items:center; gap:8px;
       font-size:15px; font-weight:600; transition: all .3s ease;
     }
-    .menu-card.safety .card-arrow{ color:#6366f1; }
-    .menu-card.msds .card-arrow  { color:#ec4899; }
-    .menu-card.report .card-arrow{ color:#06b6d4; }
-    .menu-card.opinion .card-arrow{ color:#10b981; }
-    .menu-card:hover .card-arrow{ gap:12px; }
+    .menu-card.safety .card-arrow  { color:#6366f1; }
+    .menu-card.msds .card-arrow    { color:#ec4899; }
+    .menu-card.report .card-arrow  { color:#06b6d4; }
+    .menu-card.opinion .card-arrow { color:#10b981; }
+    .menu-card.notice .card-arrow  { color:#f59e0b; }
+    .menu-card:hover .card-arrow   { gap:12px; }
 
-    /* Sub pages */
+    /* ─── 공지사항 뷰 ─── */
     .page-card{
       background:#fff; border-radius:24px; padding:28px;
       box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 1px 3px rgba(0,0,0,.03);
@@ -132,11 +156,91 @@
     .page-title{ font-size:22px; font-weight:800; letter-spacing:-.4px; color:#0f172a; }
     .hint{ font-size:13px; color:#64748b; }
 
-    /* Rules */
-    .rule-list{ display:grid; gap:14px; margin-top:8px; }
-    .rule{
-      padding:16px; border:1px solid #e2e8f0; border-radius:16px; background:#f8fafc;
+    /* 공지 목록 */
+    .notice-list { display:grid; gap:12px; margin-top:16px; }
+
+    .notice-list-item {
+      background:#fff; border:1px solid #e2e8f0; border-radius:16px;
+      padding:18px 20px; cursor:pointer;
+      transition: all .3s ease;
+      display:flex; align-items:flex-start; gap:14px;
     }
+    .notice-list-item:hover {
+      border-color:#f59e0b;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      transform: translateX(4px);
+    }
+    .notice-list-item.pinned-item {
+      border-left: 4px solid #f59e0b;
+      background: #fffbeb;
+    }
+
+    .notice-cat-badge {
+      font-size:11px; font-weight:800; padding:4px 10px;
+      border-radius:999px; flex-shrink:0; margin-top:2px;
+      display:inline-block; border:1px solid transparent;
+    }
+    .notice-item-body { flex:1; min-width:0; }
+    .notice-item-title {
+      font-size:16px; font-weight:700; color:#0f172a;
+      margin-bottom:5px; line-height:1.4;
+    }
+    .notice-item-summary {
+      font-size:13px; color:#64748b; line-height:1.5;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .notice-item-meta {
+      font-size:12px; color:#94a3b8; margin-top:6px;
+    }
+    .notice-item-arrow { font-size:20px; color:#cbd5e1; flex-shrink:0; margin-top:2px; }
+    .pin-icon { font-size:14px; margin-right:4px; }
+
+    /* 공지 상세 */
+    .notice-detail-header {
+      padding-bottom:20px; border-bottom:2px solid #f1f5f9; margin-bottom:20px;
+    }
+    .notice-detail-meta {
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px;
+    }
+    .notice-detail-title {
+      font-size:22px; font-weight:800; color:#0f172a;
+      line-height:1.4; margin-bottom:8px;
+    }
+    .notice-detail-info {
+      font-size:13px; color:#94a3b8;
+    }
+    .notice-detail-body {
+      font-size:15px; color:#334155; line-height:1.9;
+      white-space:pre-wrap;
+    }
+    .notice-detail-body strong {
+      color:#0f172a; font-weight:700;
+    }
+
+    /* 필터 버튼 */
+    .notice-filter-row {
+      display:flex; gap:8px; flex-wrap:wrap; margin-bottom:4px;
+    }
+    .filter-btn {
+      padding:7px 16px; border-radius:999px; border:1px solid #e2e8f0;
+      background:#fff; font-size:13px; font-weight:600; color:#475569;
+      cursor:pointer; transition:.2s ease;
+    }
+    .filter-btn:hover { border-color:#f59e0b; color:#92400e; }
+    .filter-btn.active {
+      background:#f59e0b; border-color:#f59e0b; color:#fff;
+    }
+
+    /* 빈 결과 */
+    .notice-empty {
+      text-align:center; padding:48px 20px;
+      color:#94a3b8; font-size:15px;
+    }
+    .notice-empty-icon { font-size:48px; display:block; margin-bottom:12px; }
+
+    /* Sub pages */
+    .rule-list{ display:grid; gap:14px; margin-top:8px; }
+    .rule{ padding:16px; border:1px solid #e2e8f0; border-radius:16px; background:#f8fafc; }
     .rule h3{ font-size:16px; margin-bottom:8px; color:#1e293b; }
     .rule ul{ padding-left:18px; color:#334155; }
     .rule li{ margin:6px 0; line-height:1.55; }
@@ -155,122 +259,55 @@
       transition:.2s ease; display:inline-flex; align-items:center; gap:8px;
     }
     .btn:active{ transform: translateY(1px); }
-    .btn-msds{ background: linear-gradient(135deg, #ec4899, #ef4444); }
+    .btn-msds  { background: linear-gradient(135deg, #ec4899, #ef4444); }
     .btn-report{ background: linear-gradient(135deg, #06b6d4, #3b82f6); }
 
-    .result{
-      margin-top:14px; border:1px solid #e2e8f0; border-radius:18px;
-      padding:16px; background:#fff;
-    }
+    .result{ margin-top:14px; border:1px solid #e2e8f0; border-radius:18px; padding:16px; background:#fff; }
     .result h4{ font-size:16px; margin-bottom:8px; color:#0f172a; }
     .badge-row{ display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 12px; }
     .badge{ font-size:12px; font-weight:900; padding:6px 10px; border-radius:999px; background:#f1f5f9; color:#334155; }
     .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
     .small{ font-size:13px; color:#64748b; line-height:1.5; }
 
-    .success{
-      margin-top:12px; padding:14px; border-radius:16px;
-      background:#ecfeff; border:1px solid #a5f3fc; color:#155e75;
-      font-weight:800; display:none;
-    }
-    .errorbox{
-      margin-top:12px; padding:14px; border-radius:16px;
-      background:#fff7ed; border:1px solid #fdba74; color:#9a3412;
-      font-weight:800; display:none;
-    }
+    .success{ margin-top:12px; padding:14px; border-radius:16px; background:#ecfeff; border:1px solid #a5f3fc; color:#155e75; font-weight:800; display:none; }
+    .errorbox{ margin-top:12px; padding:14px; border-radius:16px; background:#fff7ed; border:1px solid #fdba74; color:#9a3412; font-weight:800; display:none; }
 
-    /* Safety Category Buttons */
+    /* Safety Category */
     .safety-category-btn{
       background:#fff; border-radius:16px; padding:24px 20px;
       border:2px solid #e2e8f0; cursor:pointer;
       transition: all .3s ease; text-align:center;
       display:flex; flex-direction:column; align-items:center; gap:8px;
     }
-    .safety-category-btn:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0,0,0,.1);
-      border-color:#8b5cf6;
-    }
+    .safety-category-btn:hover{ transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,.1); border-color:#8b5cf6; }
     .cat-icon{ font-size:40px; margin-bottom:4px; }
     .cat-title{ font-size:16px; font-weight:700; color:#1e293b; line-height:1.3; }
     .cat-count{ font-size:13px; color:#64748b; font-weight:500; }
 
     /* MSDS Item Card */
-    .msds-item{
-      background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:16px;
-      cursor:pointer; transition: all .3s ease;
-      display:flex; align-items:center; gap:12px;
-    }
-    .msds-item:hover{
-      transform: translateX(4px);
-      box-shadow: 0 4px 12px rgba(0,0,0,.08);
-      border-color:#ec4899;
-    }
-    .msds-item-icon{
-      width:48px; height:48px; border-radius:10px;
-      background: linear-gradient(135deg, #ec4899, #ef4444);
-      display:flex; align-items:center; justify-content:center;
-      font-size:24px; flex-shrink:0;
-    }
+    .msds-item{ background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:16px; cursor:pointer; transition: all .3s ease; display:flex; align-items:center; gap:12px; }
+    .msds-item:hover{ transform: translateX(4px); box-shadow: 0 4px 12px rgba(0,0,0,.08); border-color:#ec4899; }
+    .msds-item-icon{ width:48px; height:48px; border-radius:10px; background: linear-gradient(135deg, #ec4899, #ef4444); display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0; }
     .msds-item-info{ flex:1; }
     .msds-item-name{ font-size:16px; font-weight:700; color:#0f172a; margin-bottom:4px; }
     .msds-item-desc{ font-size:13px; color:#64748b; }
     .msds-item-arrow{ font-size:20px; color:#ec4899; flex-shrink:0; }
 
     /* MSDS Detail */
-    .msds-section{
-      background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px;
-      padding:20px; margin-bottom:16px;
-    }
-    .msds-section h4{
-      font-size:17px; font-weight:700; color:#0f172a; margin-bottom:12px;
-      padding-bottom:8px; border-bottom:2px solid #e2e8f0;
-    }
-    .msds-info-grid{
-      display:grid; gap:8px; margin-top:8px;
-    }
-    .msds-info-row{
-      display:grid; grid-template-columns: 180px 1fr; gap:12px;
-      padding:8px; background:#fff; border-radius:8px;
-    }
-    .msds-info-label{
-      font-weight:700; color:#475569; font-size:14px;
-    }
-    .msds-info-value{
-      color:#0f172a; font-size:14px;
-    }
-    .msds-hazard-box{
-      background:#fff7ed; border:1px solid #fdba74; border-radius:8px;
-      padding:12px; margin-top:8px;
-    }
-    .msds-hazard-item{
-      padding:6px 0; border-bottom:1px solid #fed7aa;
-    }
+    .msds-section{ background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:20px; margin-bottom:16px; }
+    .msds-section h4{ font-size:17px; font-weight:700; color:#0f172a; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid #e2e8f0; }
+    .msds-info-grid{ display:grid; gap:8px; margin-top:8px; }
+    .msds-info-row{ display:grid; grid-template-columns: 180px 1fr; gap:12px; padding:8px; background:#fff; border-radius:8px; }
+    .msds-info-label{ font-weight:700; color:#475569; font-size:14px; }
+    .msds-info-value{ color:#0f172a; font-size:14px; }
+    .msds-hazard-box{ background:#fff7ed; border:1px solid #fdba74; border-radius:8px; padding:12px; margin-top:8px; }
+    .msds-hazard-item{ padding:6px 0; border-bottom:1px solid #fed7aa; }
     .msds-hazard-item:last-child{ border-bottom:none; }
-    .msds-component-table{
-      width:100%; border-collapse: collapse; margin-top:8px;
-      background:#fff; border-radius:8px; overflow:hidden;
-    }
-    .msds-component-table th{
-      background:#f1f5f9; padding:10px; text-align:left;
-      font-weight:700; font-size:14px; color:#334155;
-    }
-    .msds-component-table td{
-      padding:10px; border-top:1px solid #e2e8f0;
-      font-size:14px; color:#0f172a;
-    }
-    .msds-download-btn{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:14px 24px; border-radius:12px; border:0;
-      background: linear-gradient(135deg, #ec4899, #ef4444);
-      color:#fff; font-weight:700; font-size:15px;
-      cursor:pointer; transition:.3s ease; text-decoration:none;
-      margin-top:20px;
-    }
-    .msds-download-btn:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(236,72,153,.3);
-    }
+    .msds-component-table{ width:100%; border-collapse: collapse; margin-top:8px; background:#fff; border-radius:8px; overflow:hidden; }
+    .msds-component-table th{ background:#f1f5f9; padding:10px; text-align:left; font-weight:700; font-size:14px; color:#334155; }
+    .msds-component-table td{ padding:10px; border-top:1px solid #e2e8f0; font-size:14px; color:#0f172a; }
+    .msds-download-btn{ display:inline-flex; align-items:center; gap:8px; padding:14px 24px; border-radius:12px; border:0; background: linear-gradient(135deg, #ec4899, #ef4444); color:#fff; font-weight:700; font-size:15px; cursor:pointer; transition:.3s ease; text-decoration:none; margin-top:20px; }
+    .msds-download-btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 16px rgba(236,72,153,.3); }
 
     /* Footer */
     .footer{ text-align:center; padding:32px 24px; color:#94a3b8; }
@@ -284,12 +321,13 @@
       .company-name{ font-size:26px; }
       .site-name{ font-size:16px; }
       .header-title h1{ font-size:24px; }
-      .header-title p{ font-size:15px; }
       .menu-grid{ grid-template-columns:1fr; gap:20px; }
       .menu-card{ padding:28px 24px; }
       .card-icon{ width:64px; height:64px; font-size:32px; }
-      .card-content h2{ font-size:22px; }
+      .card-content h2{ font-size:20px; }
       .page-card{ padding:22px; }
+      .notice-item-summary{ display:none; }
+      .msds-info-row{ grid-template-columns:1fr; }
     }
     @media (max-width:480px){
       .main-container{ padding:0 16px 40px; }
@@ -315,10 +353,35 @@
   </header>
 
   <main class="main-container">
-    <!-- HOME -->
+
+    <!-- ════════════════ HOME ════════════════ -->
     <section id="view-home" class="view active">
+
+      <!-- 최신 공지 배너 -->
+     <div class="notice-banner" id="latestNoticeBanner" onclick="location.hash='#notice'">
+  <div class="notice-banner-left">
+    <div class="notice-bell">📢</div>
+    <div class="notice-banner-texts">
+      <div class="notice-banner-label" id="bannerLabel">공지</div>
+      <div class="notice-banner-title" id="bannerTitle">공지사항을 불러오는 중...</div>
+      <div class="notice-banner-date" id="bannerDate"></div>
+    </div>
+  </div>
+  <div class="notice-banner-arrow">→</div>
+</div>
+
+      <!-- 메뉴 카드 5개 -->
       <section class="menu-grid">
-        <button type="button" class="menu-card safety" data-go="safety" aria-label="안전규정 페이지로 이동">
+        <button type="button" class="menu-card notice" data-go="notice">
+          <div class="card-icon">📢</div>
+          <div class="card-content">
+            <h2>공지사항</h2>
+            <p>안전관리팀의 최신 공지, 교육 일정, 안전 주의사항을 확인하세요</p>
+          </div>
+          <div class="card-arrow">공지 보기 →</div>
+        </button>
+
+        <button type="button" class="menu-card safety" data-go="safety">
           <div class="card-icon">📋</div>
           <div class="card-content">
             <h2>안전규정</h2>
@@ -327,7 +390,7 @@
           <div class="card-arrow">자세히 보기 →</div>
         </button>
 
-        <button type="button" class="menu-card msds" data-go="msds" aria-label="MSDS 페이지로 이동">
+        <button type="button" class="menu-card msds" data-go="msds">
           <div class="card-icon">🧪</div>
           <div class="card-content">
             <h2>MSDS</h2>
@@ -336,7 +399,7 @@
           <div class="card-arrow">검색하기 →</div>
         </button>
 
-        <button type="button" class="menu-card report" data-go="report" aria-label="아차사고 신고 페이지로 이동">
+        <button type="button" class="menu-card report" data-go="report">
           <div class="card-icon">⚠️</div>
           <div class="card-content">
             <h2>아차사고 신고</h2>
@@ -345,7 +408,7 @@
           <div class="card-arrow">신고하기 →</div>
         </button>
 
-        <button type="button" class="menu-card opinion" data-go="opinion" aria-label="근로자 의견 청취 페이지로 이동">
+        <button type="button" class="menu-card opinion" data-go="opinion">
           <div class="card-icon">💬</div>
           <div class="card-content">
             <h2>근로자 의견 청취</h2>
@@ -356,7 +419,46 @@
       </section>
     </section>
 
-    <!-- SAFETY -->
+    <!-- ════════════════ NOTICE ════════════════ -->
+    <section id="view-notice" class="view">
+      <div class="page-card">
+        <div class="page-topbar">
+          <a class="back-btn" href="#home">← 메인으로</a>
+          <div style="text-align:right">
+            <div class="page-title">📢 공지사항</div>
+            <div class="hint">안전관리팀 공지 · 교육 · 안전 정보</div>
+          </div>
+        </div>
+
+        <!-- 카테고리 필터 -->
+        <div class="notice-filter-row" id="noticeFilterRow">
+          <button class="filter-btn active" data-filter="전체">전체</button>
+          <button class="filter-btn" data-filter="중요">📌 중요</button>
+          <button class="filter-btn" data-filter="안전">⚠️ 안전</button>
+          <button class="filter-btn" data-filter="교육">📚 교육</button>
+          <button class="filter-btn" data-filter="일반">📄 일반</button>
+          <button class="filter-btn" data-filter="기타">💬 기타</button>
+        </div>
+
+        <!-- 목록 -->
+        <div class="notice-list" id="noticeList"></div>
+
+        <!-- 상세 -->
+        <div id="noticeDetail" style="display:none;">
+          <div style="margin-bottom:20px;">
+            <button class="back-btn" id="noticeDetailBackBtn">← 목록으로</button>
+          </div>
+          <div class="notice-detail-header">
+            <div class="notice-detail-meta" id="noticeDetailMeta"></div>
+            <div class="notice-detail-title" id="noticeDetailTitle"></div>
+            <div class="notice-detail-info" id="noticeDetailInfo"></div>
+          </div>
+          <div class="notice-detail-body" id="noticeDetailBody"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════ SAFETY ════════════════ -->
     <section id="view-safety" class="view">
       <div class="page-card">
         <div class="page-topbar">
@@ -366,58 +468,22 @@
             <div class="hint">카테고리 선택 또는 검색으로 안전규정 찾기</div>
           </div>
         </div>
-
-        <!-- 검색 기능 -->
         <div class="search-row">
           <input id="safetySearch" class="input" type="text" placeholder="🔍 안전규정 검색 (예: 가스측정, 안전대, 밸브차단, 산소농도 등)" />
           <button id="safetySearchBtn" class="btn" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);" type="button">검색</button>
           <button id="safetySearchReset" class="btn" style="background: #64748b; display:none;" type="button">전체보기</button>
         </div>
+        <div id="safetySearchResult" style="display:none; margin-top:14px; padding:12px; background:#fef3c7; border:1px solid #fbbf24; border-radius:12px; font-size:14px; font-weight:600; color:#92400e;"></div>
 
-        <!-- 검색 결과 표시 영역 -->
-        <div id="safetySearchResult" style="display:none; margin-top:14px; padding:12px; background:#fef3c7; border:1px solid #fbbf24; border-radius:12px; font-size:14px; font-weight:600; color:#92400e;">
-        </div>
-
-        <!-- 카테고리 그리드 -->
         <div id="safetyCategoryGrid" class="safety-category-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-top:20px;">
-          <button class="safety-category-btn" data-category="fire">
-            <div class="cat-icon">🔥</div>
-            <div class="cat-title">화기작업</div>
-            <div class="cat-count">7개 항목</div>
-          </button>
-          
-          <button class="safety-category-btn" data-category="confined-before">
-            <div class="cat-icon">🚪</div>
-            <div class="cat-title">밀폐공간<br/>(개방 전)</div>
-            <div class="cat-count">7개 항목</div>
-          </button>
-          
-          <button class="safety-category-btn" data-category="confined-during">
-            <div class="cat-icon">⚠️</div>
-            <div class="cat-title">밀폐공간<br/>(작업 시)</div>
-            <div class="cat-count">13개 항목</div>
-          </button>
-          
-          <button class="safety-category-btn" data-category="general">
-            <div class="cat-icon">🛠️</div>
-            <div class="cat-title">일반위험작업</div>
-            <div class="cat-count">4개 항목</div>
-          </button>
-          
-          <button class="safety-category-btn" data-category="electric">
-            <div class="cat-icon">⚡</div>
-            <div class="cat-title">전기작업</div>
-            <div class="cat-count">10개 항목</div>
-          </button>
-          
-          <button class="safety-category-btn" data-category="height">
-            <div class="cat-icon">🪜</div>
-            <div class="cat-title">고소작업</div>
-            <div class="cat-count">5개 항목</div>
-          </button>
+          <button class="safety-category-btn" data-category="fire"><div class="cat-icon">🔥</div><div class="cat-title">화기작업</div><div class="cat-count">7개 항목</div></button>
+          <button class="safety-category-btn" data-category="confined-before"><div class="cat-icon">🚪</div><div class="cat-title">밀폐공간<br/>(개방 전)</div><div class="cat-count">7개 항목</div></button>
+          <button class="safety-category-btn" data-category="confined-during"><div class="cat-icon">⚠️</div><div class="cat-title">밀폐공간<br/>(작업 시)</div><div class="cat-count">13개 항목</div></button>
+          <button class="safety-category-btn" data-category="general"><div class="cat-icon">🛠️</div><div class="cat-title">일반위험작업</div><div class="cat-count">4개 항목</div></button>
+          <button class="safety-category-btn" data-category="electric"><div class="cat-icon">⚡</div><div class="cat-title">전기작업</div><div class="cat-count">10개 항목</div></button>
+          <button class="safety-category-btn" data-category="height"><div class="cat-icon">🪜</div><div class="cat-title">고소작업</div><div class="cat-count">5개 항목</div></button>
         </div>
 
-        <!-- 상세 내용 -->
         <div id="safetyDetailContainer" style="display:none; margin-top:20px;">
           <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
             <button id="safetyBackBtn" class="back-btn">← 카테고리로</button>
@@ -425,14 +491,10 @@
           </div>
           <div id="safetyDetailContent" class="rule-list"></div>
         </div>
-
-        <p class="small" style="margin-top:14px;">
-         
-        </p>
       </div>
     </section>
 
-    <!-- MSDS -->
+    <!-- ════════════════ MSDS ════════════════ -->
     <section id="view-msds" class="view">
       <div class="page-card">
         <div class="page-topbar">
@@ -442,34 +504,18 @@
             <div class="hint">공정별 분류 또는 검색으로 MSDS 찾기</div>
           </div>
         </div>
-
-        <!-- 검색 기능 -->
         <div class="search-row">
-          <input id="msdsQuery" class="input" type="text" placeholder="🔍 제품명 또는 CAS No. 검색 (예: 베이킹소다, 스티커제거제)" />
+          <input id="msdsQuery" class="input" type="text" placeholder="🔍 제품명 또는 CAS No. 검색" />
           <button id="msdsBtn" class="btn btn-msds" type="button">검색</button>
           <button id="msdsReset" class="btn" style="background: #64748b; display:none;" type="button">전체보기</button>
         </div>
+        <div id="msdsSearchResult" style="display:none; margin-top:14px; padding:12px; background:#fef3c7; border:1px solid #fbbf24; border-radius:12px; font-size:14px; font-weight:600; color:#92400e;"></div>
 
-        <!-- 검색 결과 표시 -->
-        <div id="msdsSearchResult" style="display:none; margin-top:14px; padding:12px; background:#fef3c7; border:1px solid #fbbf24; border-radius:12px; font-size:14px; font-weight:600; color:#92400e;">
+        <div id="msdsCategoryGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-top:20px;">
+          <button class="safety-category-btn" data-process="cleaning"><div class="cat-icon">🧹</div><div class="cat-title">미화(청소)</div><div class="cat-count">2개 제품</div></button>
+          <button class="safety-category-btn" data-process="production"><div class="cat-icon">⚙️</div><div class="cat-title">소분작업</div><div class="cat-count">4개 제품</div></button>
         </div>
 
-        <!-- 공정별 카테고리 그리드 -->
-        <div id="msdsCategoryGrid" class="safety-category-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-top:20px;">
-          <button class="safety-category-btn" data-process="cleaning">
-            <div class="cat-icon">🧹</div>
-            <div class="cat-title">미화(청소)</div>
-            <div class="cat-count">2개 제품</div>
-          </button>
-          
-          <button class="safety-category-btn" data-process="production">
-            <div class="cat-icon">⚙️</div>
-            <div class="cat-title">소분작업</div>
-            <div class="cat-count">4개 제품</div>
-          </button>
-        </div>
-
-        <!-- MSDS 목록 화면 -->
         <div id="msdsListContainer" style="display:none; margin-top:20px;">
           <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
             <button id="msdsListBackBtn" class="back-btn">← 공정 선택으로</button>
@@ -478,7 +524,6 @@
           <div id="msdsListContent" style="display:grid; gap:12px;"></div>
         </div>
 
-        <!-- MSDS 상세보기 화면 -->
         <div id="msdsDetailContainer" style="display:none; margin-top:20px;">
           <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
             <button id="msdsDetailBackBtn" class="back-btn">← 목록으로</button>
@@ -486,14 +531,11 @@
           </div>
           <div id="msdsDetailContent"></div>
         </div>
-
-        <p class="small" style="margin-top:14px;">
-          ※ MSDS는 정기적으로 업데이트되므로 최신 정보는 원본 문서를 확인하세요.
-        </p>
+        <p class="small" style="margin-top:14px;">※ MSDS는 정기적으로 업데이트되므로 최신 정보는 원본 문서를 확인하세요.</p>
       </div>
     </section>
 
-    <!-- REPORT -->
+    <!-- ════════════════ REPORT ════════════════ -->
     <section id="view-report" class="view">
       <div class="page-card">
         <div class="page-topbar">
@@ -503,43 +545,31 @@
             <div class="hint">제출 시 관리자 메일로 자동 발송</div>
           </div>
         </div>
-
-        <p class="small">
-          아래 내용을 작성 후 제출하면 <b>관리자 개인 구글메일로 즉시 알림</b>이 전송됩니다.
-        </p>
-
+        <p class="small">아래 내용을 작성 후 제출하면 <b>관리자 개인 구글메일로 즉시 알림</b>이 전송됩니다.</p>
         <div class="search-row" style="margin-top:12px;">
-          <input id="repPlace" class="input" type="text" placeholder="발생 위치 (예: 1층 창고, 전기실 앞)" />
-          <input id="repType" class="input" type="text" placeholder="위험 유형 (예: 전도, 감전, 낙하, 화재 등)" />
+          <input id="repPlace"  class="input" type="text" placeholder="발생 위치 (예: 1층 창고, 전기실 앞)" />
+          <input id="repType"   class="input" type="text" placeholder="위험 유형 (예: 전도, 감전, 낙하, 화재 등)" />
         </div>
-
         <div class="search-row">
           <textarea id="repDetail" class="input" placeholder="상세 내용 (무엇이 위험했고, 어떤 상황이었는지)"></textarea>
         </div>
-
         <div class="search-row">
-          <input id="repName" class="input" type="text" placeholder="작성자(선택) - 익명 가능" />
+          <input id="repName"  class="input" type="text" placeholder="작성자(선택) - 익명 가능" />
           <input id="repPhone" class="input" type="text" placeholder="연락처(선택)" />
         </div>
-
-        <div class="search-row" style="align-items:center;">
+        <div class="search-row">
           <button id="repBtn" class="btn btn-report" type="button">신고 제출 ✅</button>
         </div>
-
-        <div id="repOk" class="success">접수되었습니다. 메일이 전송되었습니다.</div>
+        <div id="repOk"  class="success">접수되었습니다. 메일이 전송되었습니다.</div>
         <div id="repErr" class="errorbox">전송 실패: </div>
-
         <div class="result" style="margin-top:16px;">
           <h4>안내</h4>
-          <div class="small">
-            - 실제 메일 전송 기능은 GAS 웹앱 URL을 설정하면 작동합니다.<br/>
-            - 필요하면 신고 내역을 구글시트에 저장하도록 확장할 수도 있습니다.
-          </div>
+          <div class="small">- 실제 메일 전송 기능은 GAS 웹앱 URL을 설정하면 작동합니다.<br/>- 필요하면 신고 내역을 구글시트에 저장하도록 확장할 수도 있습니다.</div>
         </div>
       </div>
     </section>
 
-    <!-- OPINION -->
+    <!-- ════════════════ OPINION ════════════════ -->
     <section id="view-opinion" class="view">
       <div class="page-card">
         <div class="page-topbar">
@@ -549,11 +579,7 @@
             <div class="hint">제출 시 관리자 메일로 자동 발송</div>
           </div>
         </div>
-
-        <p class="small">
-          현장의 안전 개선사항, 건의사항, 불편사항 등을 자유롭게 제안해 주세요. <b>관리자에게 즉시 전달</b>됩니다.
-        </p>
-
+        <p class="small">현장의 안전 개선사항, 건의사항, 불편사항 등을 자유롭게 제안해 주세요. <b>관리자에게 즉시 전달</b>됩니다.</p>
         <div class="search-row" style="margin-top:12px;">
           <select id="opinionCategory" class="input" style="flex:1 1 200px;">
             <option value="">의견 유형 선택</option>
@@ -566,23 +592,18 @@
           </select>
           <input id="opinionTitle" class="input" type="text" placeholder="제목 (간단히 요약)" style="flex:2 1 300px;" />
         </div>
-
         <div class="search-row">
-          <textarea id="opinionContent" class="input" placeholder="의견 내용을 자세히 작성해 주세요. 구체적일수록 개선에 도움이 됩니다." style="min-height:150px;"></textarea>
+          <textarea id="opinionContent" class="input" placeholder="의견 내용을 자세히 작성해 주세요." style="min-height:150px;"></textarea>
         </div>
-
         <div class="search-row">
-          <input id="opinionName" class="input" type="text" placeholder="작성자(선택) - 익명 가능" />
+          <input id="opinionName"  class="input" type="text" placeholder="작성자(선택) - 익명 가능" />
           <input id="opinionPhone" class="input" type="text" placeholder="연락처(선택) - 회신 필요 시 입력" />
         </div>
-
-        <div class="search-row" style="align-items:center;">
+        <div class="search-row">
           <button id="opinionBtn" class="btn" style="background: linear-gradient(135deg, #10b981, #059669);" type="button">의견 제출 📝</button>
         </div>
-
-        <div id="opinionOk" class="success">의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다.</div>
+        <div id="opinionOk"  class="success">의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다.</div>
         <div id="opinionErr" class="errorbox">전송 실패: </div>
-
         <div class="result" style="margin-top:16px;">
           <h4>💡 좋은 의견 제출 팁</h4>
           <div class="small">
@@ -592,12 +613,9 @@
             - <b>회신 희망:</b> 답변이 필요하면 연락처를 꼭 남겨주세요
           </div>
         </div>
-
         <div class="result" style="margin-top:12px;">
           <h4>📊 의견 처리 절차</h4>
-          <div class="small">
-            1단계: 의견 접수 → 2단계: 안전관리팀 검토 → 3단계: 관련 부서 협의 → 4단계: 개선 실행 → 5단계: 결과 공유
-          </div>
+          <div class="small">1단계: 의견 접수 → 2단계: 안전관리팀 검토 → 3단계: 관련 부서 협의 → 4단계: 개선 실행 → 5단계: 결과 공유</div>
         </div>
       </div>
     </section>
@@ -611,96 +629,194 @@
     </div>
   </footer>
 
+  <!-- ✅ 공지사항 데이터 파일 (이 파일만 수정하여 공지 관리) -->
+  <script src="notices.js"></script>
+
   <script>
-    /********************************************************
-     * 1) 라우팅: #home / #safety / #msds / #report / #opinion
-     ********************************************************/
+    /***********************************************
+     * 유틸
+     ***********************************************/
+    function escapeHtml(str) {
+      return (str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    // **텍스트** → <strong>텍스트</strong> 변환
+    function renderMarkdown(text) {
+      return escapeHtml(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    }
+
+    /***********************************************
+     * 1) 라우팅
+     ***********************************************/
     const views = {
-      home: document.getElementById('view-home'),
-      safety: document.getElementById('view-safety'),
-      msds: document.getElementById('view-msds'),
-      report: document.getElementById('view-report'),
+      home:    document.getElementById('view-home'),
+      notice:  document.getElementById('view-notice'),
+      safety:  document.getElementById('view-safety'),
+      msds:    document.getElementById('view-msds'),
+      report:  document.getElementById('view-report'),
       opinion: document.getElementById('view-opinion'),
     };
 
     function normalizeHash() {
-      const raw = (location.hash || '#home').replace('#', '').trim();
-      if (!raw) return 'home';
-      if (views[raw]) return raw;
-      return 'home';
+      const raw = (location.hash || '#home').replace('#','').trim();
+      return views[raw] ? raw : 'home';
     }
-
     function showView(name) {
       Object.values(views).forEach(v => v.classList.remove('active'));
       (views[name] || views.home).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top:0, behavior:'smooth' });
     }
-
     window.addEventListener('hashchange', () => showView(normalizeHash()));
     if (!location.hash) location.hash = '#home';
     showView(normalizeHash());
 
     document.querySelectorAll('[data-go]').forEach(btn => {
+      btn.addEventListener('click', () => { location.hash = '#' + btn.getAttribute('data-go'); });
+    });
+
+    /***********************************************
+     * 2) 공지사항 렌더링
+     ***********************************************/
+    let currentFilter = '전체';
+
+    function getCategoryStyle(cat) {
+      return NOTICE_CATEGORY_STYLES[cat] || NOTICE_CATEGORY_STYLES['기타'];
+    }
+
+    // 홈 배너 최신 공지 표시
+    function renderNoticeBanner() {
+      const pinned = NOTICES.filter(n => n.pinned);
+      const latest = pinned.length ? pinned[0] : NOTICES[0];
+      if (!latest) return;
+
+      const style = getCategoryStyle(latest.category);
+      document.getElementById('bannerLabel').textContent  = latest.category;
+      document.getElementById('bannerLabel').style.background  = style.bg;
+      document.getElementById('bannerLabel').style.color       = style.color;
+      document.getElementById('bannerLabel').style.borderColor = style.border;
+      document.getElementById('bannerTitle').textContent  = (latest.pinned ? '📌 ' : '') + latest.title;
+      document.getElementById('bannerDate').textContent   = latest.date + ' | ' + latest.author;
+    }
+    renderNoticeBanner();
+
+    // 목록 렌더링
+    function renderNoticeList(filter) {
+      const listEl = document.getElementById('noticeList');
+      const detailEl = document.getElementById('noticeDetail');
+      listEl.style.display   = '';
+      detailEl.style.display = 'none';
+
+      // 정렬: 고정 먼저, 그 다음 id 내림차순
+      let list = [...NOTICES].sort((a, b) => {
+        if (a.pinned !== b.pinned) return a.pinned ? -1 : 1;
+        return b.id - a.id;
+      });
+
+      if (filter && filter !== '전체') {
+        list = list.filter(n => n.category === filter);
+      }
+
+      if (!list.length) {
+        listEl.innerHTML = `<div class="notice-empty"><span class="notice-empty-icon">🔍</span>해당 카테고리의 공지가 없습니다.</div>`;
+        return;
+      }
+
+      listEl.innerHTML = list.map(n => {
+        const style = getCategoryStyle(n.category);
+        return `
+          <div class="notice-list-item ${n.pinned ? 'pinned-item' : ''}" data-notice-id="${n.id}">
+            <span class="notice-cat-badge" style="background:${style.bg}; color:${style.color}; border-color:${style.border};">${n.category}</span>
+            <div class="notice-item-body">
+              <div class="notice-item-title">${n.pinned ? '<span class="pin-icon">📌</span>' : ''}${escapeHtml(n.title)}</div>
+              <div class="notice-item-summary">${escapeHtml(n.summary)}</div>
+              <div class="notice-item-meta">${escapeHtml(n.date)} · ${escapeHtml(n.author)}</div>
+            </div>
+            <div class="notice-item-arrow">›</div>
+          </div>
+        `;
+      }).join('');
+
+      listEl.querySelectorAll('.notice-list-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const id = parseInt(el.getAttribute('data-notice-id'));
+          const notice = NOTICES.find(n => n.id === id);
+          if (notice) showNoticeDetail(notice);
+        });
+      });
+    }
+
+    // 상세보기
+    function showNoticeDetail(notice) {
+      const listEl   = document.getElementById('noticeList');
+      const detailEl = document.getElementById('noticeDetail');
+      listEl.style.display   = 'none';
+      detailEl.style.display = 'block';
+
+      const style = getCategoryStyle(notice.category);
+      document.getElementById('noticeDetailMeta').innerHTML =
+        `<span class="notice-cat-badge" style="background:${style.bg}; color:${style.color}; border-color:${style.border}; font-size:13px;">${escapeHtml(notice.category)}</span>
+         ${notice.pinned ? '<span style="font-size:14px;">📌 고정 공지</span>' : ''}`;
+      document.getElementById('noticeDetailTitle').textContent = notice.title;
+      document.getElementById('noticeDetailInfo').textContent  = notice.date + ' · ' + notice.author;
+      document.getElementById('noticeDetailBody').innerHTML    = renderMarkdown(notice.content);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('noticeDetailBackBtn').addEventListener('click', () => {
+      renderNoticeList(currentFilter);
+    });
+
+    // 필터 버튼
+    document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const target = btn.getAttribute('data-go');
-        location.hash = `#${target}`;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.getAttribute('data-filter');
+        renderNoticeList(currentFilter);
       });
     });
 
-    /********************************************************
-     * 2) MSDS 공정별 분류 및 상세보기
-     ********************************************************/
-    function escapeHtml(str) {
-      return (str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-    }
+    // notice 뷰 진입 시 목록 초기화
+    window.addEventListener('hashchange', () => {
+      if (normalizeHash() === 'notice') renderNoticeList(currentFilter);
+    });
+    if (normalizeHash() === 'notice') renderNoticeList(currentFilter);
+    // 초기 진입 시에도 대비
+    setTimeout(() => { if (normalizeHash() === 'notice') renderNoticeList(currentFilter); }, 0);
 
+    /***********************************************
+     * 3) MSDS 공정별 분류 및 상세보기
+     ***********************************************/
     const msdsData = {
       cleaning: {
         title: '🧹 미화(청소)',
         products: [
           {
-            id: 'baking-soda-cleaner',
-            name: '베이킹소다다목적세정제 1000ml',
-            company: '㈜퍼굿',
-            use: '욕실, 주방등 주거공간 세정용',
-            hazards: ['급성 독성(흡입:증기) : 구분4'],
-            signalWord: '경고',
+            id: 'baking-soda-cleaner', name: '베이킹소다다목적세정제 1000ml', company: '㈜퍼굿', use: '욕실, 주방등 주거공간 세정용',
+            hazards: ['급성 독성(흡입:증기) : 구분4'], signalWord: '경고',
             components: [
-              { name: '이탄산 나트륨', cas: '144-55-8', content: '0.5~4 미만' },
-              { name: '향료', cas: '-', content: '0.5 미만' },
-              { name: '계면활성제', cas: '112-34-5', content: '1~10미만' },
-              { name: '유기성 세균제거성분', cas: '26530-20-1', content: '1% 미만' },
-              { name: '유기성 세균제거성분', cas: '107-21-1', content: '1% 미만' }
+              { name:'이탄산 나트륨', cas:'144-55-8', content:'0.5~4 미만' },
+              { name:'향료', cas:'-', content:'0.5 미만' },
+              { name:'계면활성제', cas:'112-34-5', content:'1~10미만' },
+              { name:'유기성 세균제거성분', cas:'26530-20-1', content:'1% 미만' },
+              { name:'유기성 세균제거성분', cas:'107-21-1', content:'1% 미만' }
             ],
-            firstAid: {
-              eye: '긴급 의료조치를 받으시오. 물질과 접촉시 즉시 20분이상 흐르는 물에 피부와 눈을 씻어내시오',
-              skin: '긴급 의료조치를 받으시오. 오염된 옷과 신발을 제거하고 오염지역을 격리하시오',
-              inhalation: '즉시 의료기관(의사)의 진찰을 받으시오',
-              ingestion: '긴급 의료조치를 받으시오. 물질을 먹거나 흡입하였을 경우 구강대구강법으로 인공호흡을 하지말고 적절한 호흡의료장비를 이용하시오'
-            },
+            firstAid: { eye:'긴급 의료조치를 받으시오. 물질과 접촉시 즉시 20분이상 흐르는 물에 피부와 눈을 씻어내시오', skin:'긴급 의료조치를 받으시오. 오염된 옷과 신발을 제거하고 오염지역을 격리하시오', inhalation:'즉시 의료기관(의사)의 진찰을 받으시오', ingestion:'긴급 의료조치를 받으시오. 물질을 먹거나 흡입하였을 경우 구강대구강법으로 인공호흡을 하지말고 적절한 호흡의료장비를 이용하시오' },
             handling: '용기가 비워진 후에도 제품 찌꺼기가 남아 있을 수 있으므로 모든 MSDS/라벨 예방조치를 따르시오. 옥외 또는 환기가 잘 되는 곳에서만 취급하시오. 취급 후에는 취급 부위를 철저히 씻으시오',
             storage: '현행 법규 및 규정에 의하여 저장 및 취급 할 것. 혼합금지 물질과 분리 할 것. 서늘하고 건조한 장소에 보관 할 것',
             driveLink: 'https://drive.google.com/file/d/1jLE1v24CXr_e66AiIsNyq1x4GK77kzAv/view?usp=drive_link'
           },
           {
-            id: 'sticker-remover',
-            name: '스티커자국&타르제거제 420ml',
-            company: '㈜캉가루',
-            use: '스티커자국, 타르 등의 제거',
-            hazards: ['심한 눈 손상 또는 자극성 구분2A', '피부부식성 또는 자극성 물질 구분2', '인화성 에어로졸 구분1'],
-            signalWord: '위험',
+            id: 'sticker-remover', name: '스티커자국&타르제거제 420ml', company: '㈜캉가루', use: '스티커자국, 타르 등의 제거',
+            hazards: ['심한 눈 손상 또는 자극성 구분2A','피부부식성 또는 자극성 물질 구분2','인화성 에어로졸 구분1'], signalWord: '위험',
             components: [
-              { name: 'D-리모넨', cas: '5989-27-5', content: '< 20%' },
-              { name: '계면활성제', cas: '-', content: '< 5%' },
-              { name: '다이프로필렌 글리콜메틸에테르', cas: '34590-94-8', content: '< 20%' },
-              { name: '용제', cas: '64742-47-8', content: '< 40%' }
+              { name:'D-리모넨', cas:'5989-27-5', content:'< 20%' },
+              { name:'계면활성제', cas:'-', content:'< 5%' },
+              { name:'다이프로필렌 글리콜메틸에테르', cas:'34590-94-8', content:'< 20%' },
+              { name:'용제', cas:'64742-47-8', content:'< 40%' }
             ],
-            firstAid: {
-              eye: '즉시 다량의 물이나 생리 식염수로 가끔씩 아래위 눈거풀을 치켜 들면서 화학물질이 남지 않을 때까지 씻어 낼 것(15-20분). 즉시 의학적 조치를 취할 것',
-              skin: '오염된 의복과 신발은 즉시 벗을 것. 물이나 순한 세제 또는 다량의 물로 화학물질이 남지 않았다는 증거가 있을 때까지 씻어 낼 것',
-              inhalation: '기분이 이상해지면 즉시 신선한 공기가 있는 곳으로 이동하여 안정을 취할 것',
-              ingestion: '기도를 유지하며 위세척을 실시할 것. 호흡이 저해되면 구토를 시도하지 말 것. 즉시 의학적 조치를 취할 것'
-            },
+            firstAid: { eye:'즉시 다량의 물이나 생리 식염수로 가끔씩 아래위 눈거풀을 치켜 들면서 화학물질이 남지 않을 때까지 씻어 낼 것(15-20분). 즉시 의학적 조치를 취할 것', skin:'오염된 의복과 신발은 즉시 벗을 것. 물이나 순한 세제 또는 다량의 물로 화학물질이 남지 않았다는 증거가 있을 때까지 씻어 낼 것', inhalation:'기분이 이상해지면 즉시 신선한 공기가 있는 곳으로 이동하여 안정을 취할 것', ingestion:'기도를 유지하며 위세척을 실시할 것. 호흡이 저해되면 구토를 시도하지 말 것. 즉시 의학적 조치를 취할 것' },
             handling: '화기를 피하고 열이나 압력을 가하지 말 것. 취급 후에는 손을 철저히 씻으시오. 보호장갑·보호의·보안경·안면보호구를 착용하시오',
             storage: '직사광선 및 40℃이상의 장소를 피해 보관할 것. 직사광선을 피하고 50℃ 이상의 온도에 노출시키지 마시오. 얼지 않게 보관할 것',
             specialNote: '인화성 에어로졸 - 열·스파크·화염·고열로부터 멀리하시오. 화기 또는 다른 점화원에 분사하지 마시오',
@@ -712,83 +828,39 @@
         title: '⚙️ 소분작업',
         products: [
           {
-            id: 'methyl-acrylate',
-            name: '메틸 아크릴레이트',
-            company: 'Chemicalbook',
-            use: '연구 개발 전용',
-            hazards: ['인화성 액체 구분2', '급성 독성(경구) 구분3', '급성 독성(경피) 구분4', '급성 독성(흡입:증기) 구분3', '피부 부식성/피부 자극성 구분2', '심한 눈 손상성/눈 자극성 구분1', '피부 과민성 구분1', '특정표적장기 독성(1회 노출) 구분3(호흡기 자극)', '만성 수생환경 유해성 구분3'],
-            signalWord: '위험',
-            components: [
-              { name: '메틸 아크릴레이트', cas: '96-33-3', content: '100%' }
-            ],
-            firstAid: {
-              eye: '눈에 묻으면 몇 분간 물로 조심해서 씻으시오. 가능하면 콘택트렌즈를 제거하시오. 계속 씻으시오. 긴급 의료조치를 받으시오',
-              skin: '피부(또는 머리카락)에 묻으면 오염된 모든 의류를 즉시 벗으시오. 피부를 물로 씻으시오. 긴급 의료조치를 받으시오',
-              inhalation: '즉시 의료기관/의사의 진찰을 받으시오. 호흡하지 않는 경우 인공호흡을 실시하시오',
-              ingestion: '삼켰다면 즉시 의료기관/의사의 진찰을 받으시오. 입을 씻어내시오'
-            },
+            id: 'methyl-acrylate', name: '메틸 아크릴레이트', company: 'Chemicalbook', use: '연구 개발 전용',
+            hazards: ['인화성 액체 구분2','급성 독성(경구) 구분3','급성 독성(경피) 구분4','급성 독성(흡입:증기) 구분3','피부 부식성/피부 자극성 구분2','심한 눈 손상성/눈 자극성 구분1','피부 과민성 구분1','특정표적장기 독성(1회 노출) 구분3(호흡기 자극)','만성 수생환경 유해성 구분3'], signalWord: '위험',
+            components: [{ name:'메틸 아크릴레이트', cas:'96-33-3', content:'100%' }],
+            firstAid: { eye:'눈에 묻으면 몇 분간 물로 조심해서 씻으시오. 가능하면 콘택트렌즈를 제거하시오. 계속 씻으시오. 긴급 의료조치를 받으시오', skin:'피부(또는 머리카락)에 묻으면 오염된 모든 의류를 즉시 벗으시오. 피부를 물로 씻으시오. 긴급 의료조치를 받으시오', inhalation:'즉시 의료기관/의사의 진찰을 받으시오. 호흡하지 않는 경우 인공호흡을 실시하시오', ingestion:'삼켰다면 즉시 의료기관/의사의 진찰을 받으시오. 입을 씻어내시오' },
             handling: '옥외 또는 환기가 잘 되는 곳에서만 취급하시오. 방폭형 설비를 사용하시오. 스파크가 발생하지 않는 도구를 사용하시오. 정전기 방지 조치를 취하시오',
             storage: '열, 고온의 표면, 스파크, 화염 및 그 밖의 점화원으로부터 멀리하시오. 환기가 잘 되는 곳에 보관하시오. 용기를 단단히 밀폐하시오. 저온으로 유지하시오',
             specialNote: '고인화성 액체 및 증기. 격렬하게 중합반응하여 화재와 폭발을 일으킬 수 있음. 인화점 18℉(C.C.). 흡입 및 피부 흡수 시 독성',
             driveLink: 'https://drive.google.com/file/d/1UrHtHoA8-bEk1H6y3CsExKJS3D0DRHJi/view?usp=drive_link'
           },
           {
-            id: 'zinc-borate',
-            name: '붕산 아연',
-            company: 'Chemicalbook',
-            use: '연구 개발 전용',
-            hazards: ['급성 독성(흡입:분진/미스트) 구분4', '급성 수생환경 유해성 구분1'],
-            signalWord: '경고',
-            components: [
-              { name: '붕산 아연', cas: '1332-07-6', content: '100%' }
-            ],
-            firstAid: {
-              eye: '긴급 의료조치를 받으시오. 물질과 접촉시 즉시 20분 이상 흐르는 물에 피부와 눈을 씻어내시오',
-              skin: '불편함을 느끼면 의료기관(의사)의 진찰을 받으시오. 긴급 의료조치를 받으시오',
-              inhalation: '과량의 먼지 또는 흄에 노출된 경우 깨끗한 공기로 제거하고 기침이나 다른 증상이 있을 경우 의료 조치를 취하시오',
-              ingestion: '긴급 의료조치를 받으시오'
-            },
+            id: 'zinc-borate', name: '붕산 아연', company: 'Chemicalbook', use: '연구 개발 전용',
+            hazards: ['급성 독성(흡입:분진/미스트) 구분4','급성 수생환경 유해성 구분1'], signalWord: '경고',
+            components: [{ name:'붕산 아연', cas:'1332-07-6', content:'100%' }],
+            firstAid: { eye:'긴급 의료조치를 받으시오. 물질과 접촉시 즉시 20분 이상 흐르는 물에 피부와 눈을 씻어내시오', skin:'불편함을 느끼면 의료기관(의사)의 진찰을 받으시오. 긴급 의료조치를 받으시오', inhalation:'과량의 먼지 또는 흄에 노출된 경우 깨끗한 공기로 제거하고 기침이나 다른 증상이 있을 경우 의료 조치를 취하시오', ingestion:'긴급 의료조치를 받으시오' },
             handling: '(분진·흄·가스·미스트·증기·스프레이)의 흡입을 피하시오. 옥외 또는 환기가 잘 되는 곳에서만 취급하시오',
             storage: '빈 드럼통은 완전히 배수하고 적절히 막아 즉시 드럼 조절기에 되돌려 놓거나 적절히 배치하시오',
             driveLink: 'https://drive.google.com/file/d/1ROFCRoX6BcRD3AJLuAnsLYG7aVbjPF05/view?usp=drive_link'
           },
           {
-            id: 'antimony-trioxide',
-            name: '삼산화 안티몬',
-            company: 'Chemicalbook',
-            use: '연구 개발 전용',
-            hazards: ['발암성 구분2'],
-            signalWord: '경고',
-            components: [
-              { name: '삼산화 안티몬', cas: '1309-64-4', content: '100%' }
-            ],
-            firstAid: {
-              eye: '긴급 의료조치를 받으시오. 물질과 접촉시 즉시 20분 이상 흐르는 물에 피부와 눈을 씻어내시오',
-              skin: '긴급 의료조치를 받으시오. 오염된 옷과 신발을 제거하고 오염지역을 격리하시오',
-              inhalation: '노출되거나 노출이 우려되면 의학적인 조치·조언을 구하시오. 신선한 공기가 있는 곳으로 옮기시오',
-              ingestion: '노출되거나 노출이 우려되면 의학적인 조치·조언을 구하시오'
-            },
+            id: 'antimony-trioxide', name: '삼산화 안티몬', company: 'Chemicalbook', use: '연구 개발 전용',
+            hazards: ['발암성 구분2'], signalWord: '경고',
+            components: [{ name:'삼산화 안티몬', cas:'1309-64-4', content:'100%' }],
+            firstAid: { eye:'긴급 의료조치를 받으시오. 물질과 접촉시 즉시 20분 이상 흐르는 물에 피부와 눈을 씻어내시오', skin:'긴급 의료조치를 받으시오. 오염된 옷과 신발을 제거하고 오염지역을 격리하시오', inhalation:'노출되거나 노출이 우려되면 의학적인 조치·조언을 구하시오. 신선한 공기가 있는 곳으로 옮기시오', ingestion:'노출되거나 노출이 우려되면 의학적인 조치·조언을 구하시오' },
             handling: '모든 안전 예방조치 문구를 읽고 이해하기 전에는 취급하지 마시오. 물질 취급시 모든 장비를 반드시 접지하시오',
             storage: '잠금장치가 있는 저장장소에 저장하시오. 빈 드럼통은 완전히 배수하고 적절히 막아 즉시 드럼 조절기에 되돌려 놓거나 적절히 배치하시오',
             specialNote: '발암성 물질 - 암을 일으킬 것으로 의심됨. 특별관리물질. 고온에서 분해되어 독성가스를 생성할 수 있음',
             driveLink: 'https://drive.google.com/file/d/1xT4rSpTDro8xyA4IidHFQtJPBDx22iLy/view?usp=drive_link'
           },
           {
-            id: 'triphenyl-phosphate',
-            name: '트리페닐 포스페이트',
-            company: 'Chemicalbook',
-            use: '연구 개발 전용',
-            hazards: ['급성 수생환경 유해성 구분1', '만성 수생환경 유해성 구분1'],
-            signalWord: '경고',
-            components: [
-              { name: '트리페닐 포스페이트', cas: '115-86-6', content: '100%' }
-            ],
-            firstAid: {
-              eye: '긴급 의료조치를 받으시오. 물질과 접촉시 즉시 20분 이상 흐르는 물에 피부와 눈을 씻어내시오',
-              skin: '긴급 의료조치를 받으시오. 오염된 옷과 신발을 제거하고 오염지역을 격리하시오',
-              inhalation: '신선한 공기가 있는 곳으로 옮기시오. 긴급 의료조치를 받으시오',
-              ingestion: '긴급 의료조치를 받으시오'
-            },
+            id: 'triphenyl-phosphate', name: '트리페닐 포스페이트', company: 'Chemicalbook', use: '연구 개발 전용',
+            hazards: ['급성 수생환경 유해성 구분1','만성 수생환경 유해성 구분1'], signalWord: '경고',
+            components: [{ name:'트리페닐 포스페이트', cas:'115-86-6', content:'100%' }],
+            firstAid: { eye:'긴급 의료조치를 받으시오. 물질과 접촉시 즉시 20분 이상 흐르는 물에 피부와 눈을 씻어내시오', skin:'긴급 의료조치를 받으시오. 오염된 옷과 신발을 제거하고 오염지역을 격리하시오', inhalation:'신선한 공기가 있는 곳으로 옮기시오. 긴급 의료조치를 받으시오', ingestion:'긴급 의료조치를 받으시오' },
             handling: '용기가 비워진 후에도 제품 찌꺼기가 남아 있을 수 있으므로 모든 MSDS/라벨 예방조치를 따르시오. 공학적 관리 및 개인보호구를 참조하여 작업하시오',
             storage: '피해야할 물질 및 조건에 유의하시오',
             specialNote: '환경유해물질 - 수생생물에 매우 유독함. 장기적인 영향에 의해 수생생물에게 매우 유독함. 환경으로 배출하지 마시오',
@@ -798,37 +870,31 @@
       }
     };
 
-    const msdsCategoryGrid = document.getElementById('msdsCategoryGrid');
-    const msdsListContainer = document.getElementById('msdsListContainer');
-    const msdsListTitle = document.getElementById('msdsListTitle');
-    const msdsListContent = document.getElementById('msdsListContent');
-    const msdsListBackBtn = document.getElementById('msdsListBackBtn');
+    const msdsCategoryGrid   = document.getElementById('msdsCategoryGrid');
+    const msdsListContainer   = document.getElementById('msdsListContainer');
+    const msdsListTitle       = document.getElementById('msdsListTitle');
+    const msdsListContent     = document.getElementById('msdsListContent');
+    const msdsListBackBtn     = document.getElementById('msdsListBackBtn');
     const msdsDetailContainer = document.getElementById('msdsDetailContainer');
-    const msdsDetailTitle = document.getElementById('msdsDetailTitle');
-    const msdsDetailContent = document.getElementById('msdsDetailContent');
-    const msdsDetailBackBtn = document.getElementById('msdsDetailBackBtn');
-    const msdsQueryInput = document.getElementById('msdsQuery');
-    const msdsBtnSearch = document.getElementById('msdsBtn');
-    const msdsResetBtn = document.getElementById('msdsReset');
+    const msdsDetailTitle     = document.getElementById('msdsDetailTitle');
+    const msdsDetailContent   = document.getElementById('msdsDetailContent');
+    const msdsDetailBackBtn   = document.getElementById('msdsDetailBackBtn');
+    const msdsQueryInput      = document.getElementById('msdsQuery');
+    const msdsBtnSearch       = document.getElementById('msdsBtn');
+    const msdsResetBtn        = document.getElementById('msdsReset');
     const msdsSearchResultDiv = document.getElementById('msdsSearchResult');
-
     let currentProcess = '';
 
-    // 공정 선택
     document.querySelectorAll('[data-process]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const process = btn.getAttribute('data-process');
-        if (msdsData[process]) {
-          showMsdsList(process);
-        }
+        const p = btn.getAttribute('data-process');
+        if (msdsData[p]) showMsdsList(p);
       });
     });
 
-    // MSDS 목록 표시
     function showMsdsList(process) {
       currentProcess = process;
       const data = msdsData[process];
-
       msdsListTitle.textContent = data.title;
       msdsListContent.innerHTML = data.products.map(product => `
         <div class="msds-item" data-product-id="${product.id}">
@@ -838,178 +904,92 @@
             <div class="msds-item-desc">${escapeHtml(product.company)} | ${escapeHtml(product.use)}</div>
           </div>
           <div class="msds-item-arrow">→</div>
-        </div>
-      `).join('');
-
-      // 제품 클릭 이벤트
+        </div>`).join('');
       msdsListContent.querySelectorAll('.msds-item').forEach(item => {
         item.addEventListener('click', () => {
-          const productId = item.getAttribute('data-product-id');
-          const product = data.products.find(p => p.id === productId);
+          const product = data.products.find(p => p.id === item.getAttribute('data-product-id'));
           if (product) showMsdsDetail(product);
         });
       });
-
-      msdsCategoryGrid.style.display = 'none';
+      msdsCategoryGrid.style.display   = 'none';
       msdsSearchResultDiv.style.display = 'none';
-      msdsListContainer.style.display = 'block';
+      msdsListContainer.style.display   = 'block';
       msdsDetailContainer.style.display = 'none';
     }
 
-    // MSDS 상세보기
     function showMsdsDetail(product) {
       msdsDetailTitle.textContent = product.name;
-
       msdsDetailContent.innerHTML = `
         <div class="msds-section">
           <h4>📌 제품 기본 정보</h4>
           <div class="msds-info-grid">
-            <div class="msds-info-row">
-              <div class="msds-info-label">제품명</div>
-              <div class="msds-info-value">${escapeHtml(product.name)}</div>
-            </div>
-            <div class="msds-info-row">
-              <div class="msds-info-label">제조/공급사</div>
-              <div class="msds-info-value">${escapeHtml(product.company)}</div>
-            </div>
-            <div class="msds-info-row">
-              <div class="msds-info-label">용도</div>
-              <div class="msds-info-value">${escapeHtml(product.use)}</div>
-            </div>
-            <div class="msds-info-row">
-              <div class="msds-info-label">신호어</div>
-              <div class="msds-info-value"><strong style="color:#dc2626;">${escapeHtml(product.signalWord)}</strong></div>
-            </div>
+            <div class="msds-info-row"><div class="msds-info-label">제품명</div><div class="msds-info-value">${escapeHtml(product.name)}</div></div>
+            <div class="msds-info-row"><div class="msds-info-label">제조/공급사</div><div class="msds-info-value">${escapeHtml(product.company)}</div></div>
+            <div class="msds-info-row"><div class="msds-info-label">용도</div><div class="msds-info-value">${escapeHtml(product.use)}</div></div>
+            <div class="msds-info-row"><div class="msds-info-label">신호어</div><div class="msds-info-value"><strong style="color:#dc2626;">${escapeHtml(product.signalWord)}</strong></div></div>
           </div>
         </div>
-
         <div class="msds-section">
           <h4>⚠️ 유해·위험성</h4>
-          <div class="msds-hazard-box">
-            ${product.hazards.map(h => `<div class="msds-hazard-item">• ${escapeHtml(h)}</div>`).join('')}
-          </div>
+          <div class="msds-hazard-box">${product.hazards.map(h=>`<div class="msds-hazard-item">• ${escapeHtml(h)}</div>`).join('')}</div>
         </div>
-
         <div class="msds-section">
           <h4>🧬 구성성분</h4>
           <table class="msds-component-table">
-            <thead>
-              <tr>
-                <th>물질명</th>
-                <th>CAS No.</th>
-                <th>함유량</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${product.components.map(c => `
-                <tr>
-                  <td>${escapeHtml(c.name)}</td>
-                  <td><span class="mono">${escapeHtml(c.cas)}</span></td>
-                  <td>${escapeHtml(c.content)}</td>
-                </tr>
-              `).join('')}
-            </tbody>
+            <thead><tr><th>물질명</th><th>CAS No.</th><th>함유량</th></tr></thead>
+            <tbody>${product.components.map(c=>`<tr><td>${escapeHtml(c.name)}</td><td><span class="mono">${escapeHtml(c.cas)}</span></td><td>${escapeHtml(c.content)}</td></tr>`).join('')}</tbody>
           </table>
         </div>
-
         <div class="msds-section">
           <h4>🚑 응급조치 요령</h4>
           <div class="msds-info-grid">
-            <div class="msds-info-row">
-              <div class="msds-info-label">눈에 들어갔을 때</div>
-              <div class="msds-info-value">${escapeHtml(product.firstAid.eye)}</div>
-            </div>
-            <div class="msds-info-row">
-              <div class="msds-info-label">피부에 접촉했을 때</div>
-              <div class="msds-info-value">${escapeHtml(product.firstAid.skin)}</div>
-            </div>
-            <div class="msds-info-row">
-              <div class="msds-info-label">흡입했을 때</div>
-              <div class="msds-info-value">${escapeHtml(product.firstAid.inhalation)}</div>
-            </div>
-            <div class="msds-info-row">
-              <div class="msds-info-label">먹었을 때</div>
-              <div class="msds-info-value">${escapeHtml(product.firstAid.ingestion)}</div>
-            </div>
+            <div class="msds-info-row"><div class="msds-info-label">눈에 들어갔을 때</div><div class="msds-info-value">${escapeHtml(product.firstAid.eye)}</div></div>
+            <div class="msds-info-row"><div class="msds-info-label">피부에 접촉했을 때</div><div class="msds-info-value">${escapeHtml(product.firstAid.skin)}</div></div>
+            <div class="msds-info-row"><div class="msds-info-label">흡입했을 때</div><div class="msds-info-value">${escapeHtml(product.firstAid.inhalation)}</div></div>
+            <div class="msds-info-row"><div class="msds-info-label">먹었을 때</div><div class="msds-info-value">${escapeHtml(product.firstAid.ingestion)}</div></div>
           </div>
         </div>
-
         <div class="msds-section">
           <h4>📦 취급 및 저장방법</h4>
           <div class="msds-info-grid">
-            <div class="msds-info-row">
-              <div class="msds-info-label">안전취급요령</div>
-              <div class="msds-info-value">${escapeHtml(product.handling)}</div>
-            </div>
-            <div class="msds-info-row">
-              <div class="msds-info-label">안전한 저장방법</div>
-              <div class="msds-info-value">${escapeHtml(product.storage)}</div>
-            </div>
+            <div class="msds-info-row"><div class="msds-info-label">안전취급요령</div><div class="msds-info-value">${escapeHtml(product.handling)}</div></div>
+            <div class="msds-info-row"><div class="msds-info-label">안전한 저장방법</div><div class="msds-info-value">${escapeHtml(product.storage)}</div></div>
           </div>
         </div>
-
-        ${product.specialNote ? `
-          <div class="msds-section" style="background:#fef2f2; border-color:#fca5a5;">
-            <h4 style="color:#dc2626;">🔥 특별 주의사항</h4>
-            <div style="color:#991b1b; font-weight:600; padding:8px;">
-              ${escapeHtml(product.specialNote)}
-            </div>
-          </div>
-        ` : ''}
-
-        <a href="${product.driveLink}" target="_blank" class="msds-download-btn">
-          📄 원본 MSDS 보기 (구글 드라이브)
-        </a>
-      `;
-
-      msdsListContainer.style.display = 'none';
+        ${product.specialNote ? `<div class="msds-section" style="background:#fef2f2; border-color:#fca5a5;"><h4 style="color:#dc2626;">🔥 특별 주의사항</h4><div style="color:#991b1b; font-weight:600; padding:8px;">${escapeHtml(product.specialNote)}</div></div>` : ''}
+        <a href="${product.driveLink}" target="_blank" class="msds-download-btn">📄 원본 MSDS 보기 (구글 드라이브)</a>`;
+      msdsListContainer.style.display   = 'none';
       msdsDetailContainer.style.display = 'block';
     }
 
-    // 뒤로가기 버튼들
     msdsListBackBtn.addEventListener('click', () => {
-      msdsCategoryGrid.style.display = 'grid';
-      msdsListContainer.style.display = 'none';
+      msdsCategoryGrid.style.display   = 'grid';
+      msdsListContainer.style.display   = 'none';
       msdsSearchResultDiv.style.display = 'none';
-      msdsResetBtn.style.display = 'none';
+      msdsResetBtn.style.display        = 'none';
       msdsQueryInput.value = '';
     });
+    msdsDetailBackBtn.addEventListener('click', () => { showMsdsList(currentProcess); });
 
-    msdsDetailBackBtn.addEventListener('click', () => {
-      showMsdsList(currentProcess);
-    });
-
-    // 검색 기능
     function searchMsds() {
       const query = msdsQueryInput.value.trim().toLowerCase();
-      if (!query) {
-        msdsSearchResultDiv.style.display = 'block';
-        msdsSearchResultDiv.textContent = '검색어를 입력해주세요.';
-        return;
-      }
-
+      if (!query) { msdsSearchResultDiv.style.display='block'; msdsSearchResultDiv.textContent='검색어를 입력해주세요.'; return; }
       let results = [];
       Object.entries(msdsData).forEach(([processKey, processData]) => {
         processData.products.forEach(product => {
-          if (product.name.toLowerCase().includes(query) ||
-              product.company.toLowerCase().includes(query) ||
-              product.use.toLowerCase().includes(query) ||
-              product.components.some(c => c.name.toLowerCase().includes(query) || (c.cas || '').includes(query))) {
+          if (product.name.toLowerCase().includes(query) || product.company.toLowerCase().includes(query) || product.use.toLowerCase().includes(query) ||
+              product.components.some(c => c.name.toLowerCase().includes(query) || (c.cas||'').includes(query))) {
             results.push({ ...product, processTitle: processData.title, processKey });
           }
         });
       });
-
-      if (results.length === 0) {
+      if (!results.length) {
         msdsSearchResultDiv.style.display = 'block';
         msdsSearchResultDiv.innerHTML = `"${escapeHtml(query)}"에 대한 검색 결과가 없습니다.`;
-        msdsListContainer.style.display = 'none';
-        msdsCategoryGrid.style.display = 'grid';
-        msdsResetBtn.style.display = 'inline-flex';
+        msdsListContainer.style.display = 'none'; msdsCategoryGrid.style.display = 'grid'; msdsResetBtn.style.display = 'inline-flex';
       } else {
         msdsSearchResultDiv.style.display = 'block';
         msdsSearchResultDiv.innerHTML = `🔍 총 <strong>${results.length}개</strong>의 제품을 찾았습니다.`;
-
         msdsListTitle.textContent = `검색 결과: "${query}"`;
         msdsListContent.innerHTML = results.map(product => `
           <div class="msds-item" data-product-id="${product.id}" data-process="${product.processKey}">
@@ -1019,365 +999,239 @@
               <div class="msds-item-desc">${escapeHtml(product.processTitle)} | ${escapeHtml(product.company)}</div>
             </div>
             <div class="msds-item-arrow">→</div>
-          </div>
-        `).join('');
-
-        // 검색 결과 클릭 이벤트
+          </div>`).join('');
         msdsListContent.querySelectorAll('.msds-item').forEach(item => {
           item.addEventListener('click', () => {
             const productId = item.getAttribute('data-product-id');
             const processKey = item.getAttribute('data-process');
             const product = msdsData[processKey].products.find(p => p.id === productId);
-            if (product) {
-              currentProcess = processKey;
-              showMsdsDetail(product);
-            }
+            if (product) { currentProcess = processKey; showMsdsDetail(product); }
           });
         });
-
-        msdsCategoryGrid.style.display = 'none';
-        msdsListContainer.style.display = 'block';
-        msdsResetBtn.style.display = 'inline-flex';
+        msdsCategoryGrid.style.display = 'none'; msdsListContainer.style.display = 'block'; msdsResetBtn.style.display = 'inline-flex';
       }
     }
-
     msdsBtnSearch.addEventListener('click', searchMsds);
-    msdsQueryInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') searchMsds(); });
-
+    msdsQueryInput.addEventListener('keydown', e => { if (e.key==='Enter') searchMsds(); });
     msdsResetBtn.addEventListener('click', () => {
-      msdsQueryInput.value = '';
-      msdsCategoryGrid.style.display = 'grid';
-      msdsListContainer.style.display = 'none';
-      msdsSearchResultDiv.style.display = 'none';
-      msdsResetBtn.style.display = 'none';
+      msdsQueryInput.value = ''; msdsCategoryGrid.style.display = 'grid';
+      msdsListContainer.style.display = 'none'; msdsSearchResultDiv.style.display = 'none'; msdsResetBtn.style.display = 'none';
     });
 
-    /********************************************************
-     * 3) 아차사고 신고
-     ********************************************************/
-    const repPlace = document.getElementById('repPlace');
-    const repType = document.getElementById('repType');
-    const repDetail = document.getElementById('repDetail');
-    const repName = document.getElementById('repName');
-    const repPhone = document.getElementById('repPhone');
+    /***********************************************
+     * 4) 아차사고 신고
+     ***********************************************/
     const repBtn = document.getElementById('repBtn');
-    const repOk = document.getElementById('repOk');
+    const repOk  = document.getElementById('repOk');
     const repErr = document.getElementById('repErr');
 
-    function showOk(msg){
-      repOk.textContent = msg || "접수되었습니다. 메일이 전송되었습니다.";
-      repOk.style.display = 'block';
-      repErr.style.display = 'none';
-    }
-    function showErr(msg){
-      repErr.textContent = "전송 실패: " + (msg || "알 수 없는 오류");
-      repErr.style.display = 'block';
-      repOk.style.display = 'none';
-    }
-
-    function submitReport() {
-      repOk.style.display = 'none';
-      repErr.style.display = 'none';
-
+    repBtn.addEventListener('click', () => {
+      repOk.style.display = 'none'; repErr.style.display = 'none';
       const payload = {
-        place: repPlace.value.trim(),
-        type: repType.value.trim(),
-        detail: repDetail.value.trim(),
-        name: repName.value.trim(),
-        phone: repPhone.value.trim(),
+        place:  document.getElementById('repPlace').value.trim(),
+        type:   document.getElementById('repType').value.trim(),
+        detail: document.getElementById('repDetail').value.trim(),
+        name:   document.getElementById('repName').value.trim(),
+        phone:  document.getElementById('repPhone').value.trim(),
       };
-
       if (!payload.place || !payload.type || !payload.detail) {
-        showErr("필수 항목(위치/위험유형/상세내용)을 입력해 주세요.");
-        return;
+        repErr.textContent = '전송 실패: 필수 항목(위치/위험유형/상세내용)을 입력해 주세요.';
+        repErr.style.display = 'block'; return;
       }
-
-      repBtn.disabled = true;
-      repBtn.textContent = "전송 중...";
-
-      // 데모: 1초 후 완료 처리
+      repBtn.disabled = true; repBtn.textContent = '전송 중...';
       setTimeout(() => {
-        showOk("✅ 접수되었습니다. 메일이 전송되었습니다.");
-
-        console.log('=== 아차사고 신고 데이터 ===');
-        console.log('발생 위치:', payload.place);
-        console.log('위험 유형:', payload.type);
-        console.log('상세 내용:', payload.detail);
-        console.log('작성자:', payload.name || '(익명)');
-        console.log('연락처:', payload.phone || '(없음)');
-        console.log('===========================');
-
-        repPlace.value = "";
-        repType.value = "";
-        repDetail.value = "";
-        repName.value = "";
-        repPhone.value = "";
-
-        repBtn.disabled = false;
-        repBtn.textContent = "신고 제출 ✅";
+        repOk.textContent = '✅ 접수되었습니다. 메일이 전송되었습니다.';
+        repOk.style.display = 'block';
+        ['repPlace','repType','repDetail','repName','repPhone'].forEach(id => { document.getElementById(id).value=''; });
+        repBtn.disabled = false; repBtn.textContent = '신고 제출 ✅';
       }, 1000);
-    }
+    });
 
-    repBtn.addEventListener('click', submitReport);
-
-    /********************************************************
-     * 4) 안전규정 카테고리 및 검색
-     ********************************************************/
+    /***********************************************
+     * 5) 안전규정
+     ***********************************************/
     const safetyData = {
       fire: {
         title: '🔥 화기작업',
         items: [
-          { label: '작업구역설정', content: '화기작업을 수행할 때 발생하는 화염 또는 스파크 등이 공정설비에 영향이 있다고 판단되는 범위의 지역은 작업구역으로 표시하고 통행 및 출입을 제한한다.' },
-          { label: '유해 위험물질 방출 및 처리', content: '배관 또는 용기 등의 내부에서 화기작업을 수행할 때는 배관 및 용기 내부의 인화성 물질을 완전히 비우고 세정하여야 한다.' },
-          { label: '가스농도 측정', content: '작업 전, 휴식 및 중식 후 작업이 개시되기 전에 작업구역 주변의 가연성, 독성물질 농도를 측정하고, 측정시간 및 결과를 안전작업허가서에 기재하여야 한다.' },
-          { label: '밸브차단 및 위험꼬리표 부착', content: '작업수행을 위해 밸브를 차단하거나 맹판을 설치할 때에는 차단밸브 및 맹판에 위험 꼬리표를 부착하여 실수로 작동시키거나 제거하는 일이 없도록 한다.' },
-          { label: '작업 입회', content: '작업입회자를 선임하여 가스측정, 안전작업 감시 및 안전조치의 유지 등 작업 감독의 역할을 수행하도록 하여야 한다.' },
-          { label: '비산불티 차단막 설치', content: '화기작업 중 발생되는 불티 등이 인접 인화성물질에 비산되어 화재가 발생되지 않도록 비산불티 차단조치를 실시하고, 개방된 맨홀과 하수구 등을 밀폐하여야 한다.' },
-          { label: '소화설비 설치', content: '화기작업 전에 소화기 등을 비치하고, 필요한 경우 작업현장에 소화전 또는 소화수를 비치한다.' }
+          { label:'작업구역설정', content:'화기작업을 수행할 때 발생하는 화염 또는 스파크 등이 공정설비에 영향이 있다고 판단되는 범위의 지역은 작업구역으로 표시하고 통행 및 출입을 제한한다.' },
+          { label:'유해 위험물질 방출 및 처리', content:'배관 또는 용기 등의 내부에서 화기작업을 수행할 때는 배관 및 용기 내부의 인화성 물질을 완전히 비우고 세정하여야 한다.' },
+          { label:'가스농도 측정', content:'작업 전, 휴식 및 중식 후 작업이 개시되기 전에 작업구역 주변의 가연성, 독성물질 농도를 측정하고, 측정시간 및 결과를 안전작업허가서에 기재하여야 한다.' },
+          { label:'밸브차단 및 위험꼬리표 부착', content:'작업수행을 위해 밸브를 차단하거나 맹판을 설치할 때에는 차단밸브 및 맹판에 위험 꼬리표를 부착하여 실수로 작동시키거나 제거하는 일이 없도록 한다.' },
+          { label:'작업 입회', content:'작업입회자를 선임하여 가스측정, 안전작업 감시 및 안전조치의 유지 등 작업 감독의 역할을 수행하도록 하여야 한다.' },
+          { label:'비산불티 차단막 설치', content:'화기작업 중 발생되는 불티 등이 인접 인화성물질에 비산되어 화재가 발생되지 않도록 비산불티 차단조치를 실시하고, 개방된 맨홀과 하수구 등을 밀폐하여야 한다.' },
+          { label:'소화설비 설치', content:'화기작업 전에 소화기 등을 비치하고, 필요한 경우 작업현장에 소화전 또는 소화수를 비치한다.' }
         ]
       },
       'confined-before': {
         title: '🚪 밀폐공간 작업 - 개방 전 안전조치사항',
         items: [
-          { label: '압력 및 온도 조절', content: '고온 고압 하에서 운전되었던 밀폐용기의 작업을 하고자 할 때에는 압력을 방출시키거나 온도를 낮추어야 한다.' },
-          { label: '용기내부 물질 제거 및 치환', content: '용기내부의 물질을 제거하고 질소와 공기로 치환한다. 특히 용기내부의 포켓부분이나 드레인라인 등에 잔류될 수 있는 물질을 완전히 제거하여야 한다.' },
-          { label: '배관 격리', content: '용기와 연결된 모든 유입 배관은 밸브 이중잠금 또는 맹판을 설치하여 격리하여야 하고, 밸브 잠금 또는 맹판에는 위험꼬리표를 부착하여야 한다.' },
-          { label: '작동부분 차단', content: '기기내의 모든 작동부분은 전기 또는 기계적으로 차단하고 위험꼬리표를 부착하여 실수로 작동되는 일이 없도록 조치하여야 한다.' },
-          { label: '안전보건교육', content: '취급물질의 물질안전보건자료 및 작업자에게 작업과 관련된 위험사항에 대해 작업 전 안전보건교육을 실시하여야 한다.' },
-          { label: '보호구 착용 확인', content: '용기 내 잔류 유해 위험물질에 작업자가 폭로되지 않도록 안전장구 및 개인보호구 착용여부를 확인하여야 한다.' },
-          { label: '별도 작업절차서 작성', content: '배출장치가 설치되지 않은 인화성 또는 독성 물질 취급용기를 개방할 때는 별도의 작업절차서를 작성하고, 작업입회자의 감독하에 작업이 수행되도록 하여야 한다.' }
+          { label:'압력 및 온도 조절', content:'고온 고압 하에서 운전되었던 밀폐용기의 작업을 하고자 할 때에는 압력을 방출시키거나 온도를 낮추어야 한다.' },
+          { label:'용기내부 물질 제거 및 치환', content:'용기내부의 물질을 제거하고 질소와 공기로 치환한다. 특히 용기내부의 포켓부분이나 드레인라인 등에 잔류될 수 있는 물질을 완전히 제거하여야 한다.' },
+          { label:'배관 격리', content:'용기와 연결된 모든 유입 배관은 밸브 이중잠금 또는 맹판을 설치하여 격리하여야 하고, 밸브 잠금 또는 맹판에는 위험꼬리표를 부착하여야 한다.' },
+          { label:'작동부분 차단', content:'기기내의 모든 작동부분은 전기 또는 기계적으로 차단하고 위험꼬리표를 부착하여 실수로 작동되는 일이 없도록 조치하여야 한다.' },
+          { label:'안전보건교육', content:'취급물질의 물질안전보건자료 및 작업자에게 작업과 관련된 위험사항에 대해 작업 전 안전보건교육을 실시하여야 한다.' },
+          { label:'보호구 착용 확인', content:'용기 내 잔류 유해 위험물질에 작업자가 폭로되지 않도록 안전장구 및 개인보호구 착용여부를 확인하여야 한다.' },
+          { label:'별도 작업절차서 작성', content:'배출장치가 설치되지 않은 인화성 또는 독성 물질 취급용기를 개방할 때는 별도의 작업절차서를 작성하고, 작업입회자의 감독하에 작업이 수행되도록 하여야 한다.' }
         ]
       },
       'confined-during': {
         title: '⚠️ 밀폐공간 작업 시 안전보건사항',
         items: [
-          { label: '용기의 세척과 치환', content: '출입에 앞서 용기 내부 및 유해 위험물질 잔류할 수 있는 부분은 분리하여 철저하게 세척하고, 세척작업 시 수증기 또는 질소를 사용한 경우에는 반드시 공기 또는 물질로 치환하여야 한다.' },
-          { label: '인화성 및 독성 물질 등의 가스농도 측정', content: '용기 내부 세척 후 용기 내에 인화성 및 독성 물질 등의 체류여부를 확인하기 위해 가스농도를 측정하고 측정시간 및 농도를 작업허가서에 기재하여야 한다.' },
-          { label: '산소농도 측정', content: '용기 내부 세척 후 산소농도 측정기를 사용하여 산소농도를 측정하고, 그 측정시간 및 농도를 작업허가서에 기재한다.' },
-          { label: '가스 및 산소 측정 빈도', content: '작업 전, 작업 재개 후, 휴식 후 등 작업자가 밀폐공간에 들어갈 때마다 측정하여야 하며, 농도의 변화가 의심스러울 경우에도 측정하여야 한다.' },
-          { label: '밀폐공간 출입 작업허가 제한', content: '용기 내 공기질 측정결과가 안전한 상태 (산소 농도 19.5% 이상 23.5% 미만, 탄산 가스의 농도 1.5% 미만, 일산화탄소 농도 30ppm 미만, 황화수소 농도 10ppm 미만)로 확인될 때까지 작업자의 출입을 제한하여야 한다.' },
-          { label: '긴급 통신장비 비치', content: '밀폐공간 내 작업자와 외부 감시인 사이에 상시 연락을 취할 수 있는 통신장비를 비치하도록 조치하여야 한다.' },
-          { label: '긴급구호장비의 비치 및 착용', content: '송기마스크, 호흡용 보호구, 사다리 및 구명줄 등 비상시에 작업자를 대피시키거나 구출하기 위해 필요한 기구를 비치하여야 한다.' },
-          { label: '작업 입회 및 밀폐공간 출입현황판 기록', content: '작업입회자를 선임하여야 한다. 작업입회자는 작업자가 밀폐공간 출입 시 반드시 입회하고, 출입현황판에 기록관리 하여야 한다.' },
-          { label: '환기', content: '송풍기를 설치하여 내부를 강제 환기하거나, 작업자에게 에어라인 또는 송기마스크를 착용시킨 후 작업하도록 하여야 한다.' },
-          { label: '조명', content: '작업 중 조명이 필요한 경우에는 저전압용 방폭등을 사용하도록 조치하여야 한다.' },
-          { label: '방폭형 공구의 사용', content: '인화성 물질 등으로 인한 화재 폭발의 위험이 있는 경우 작업자가 공기작동식 공구 또는 방폭형 공구를 사용하도록 한다.' },
-          { label: '구출 시 송기마스크 착용', content: '밀폐공간에 위급한 작업자를 구출하려는 자는 송기마스크 등을 착용하여야 한다.' },
-          { label: '출입의 통제', content: '작업이 완료되지 않은 채 당일 작업이 중단된 경우에는 경계로프, 출입금지 표지판 등을 밀폐공간 출입구에 부착하여 외부인의 출입을 통제하여야 한다.' }
+          { label:'용기의 세척과 치환', content:'출입에 앞서 용기 내부 및 유해 위험물질 잔류할 수 있는 부분은 분리하여 철저하게 세척하고, 세척작업 시 수증기 또는 질소를 사용한 경우에는 반드시 공기 또는 물질로 치환하여야 한다.' },
+          { label:'인화성 및 독성 물질 등의 가스농도 측정', content:'용기 내부 세척 후 용기 내에 인화성 및 독성 물질 등의 체류여부를 확인하기 위해 가스농도를 측정하고 측정시간 및 농도를 작업허가서에 기재하여야 한다.' },
+          { label:'산소농도 측정', content:'용기 내부 세척 후 산소농도 측정기를 사용하여 산소농도를 측정하고, 그 측정시간 및 농도를 작업허가서에 기재한다.' },
+          { label:'가스 및 산소 측정 빈도', content:'작업 전, 작업 재개 후, 휴식 후 등 작업자가 밀폐공간에 들어갈 때마다 측정하여야 하며, 농도의 변화가 의심스러울 경우에도 측정하여야 한다.' },
+          { label:'밀폐공간 출입 작업허가 제한', content:'용기 내 공기질 측정결과가 안전한 상태 (산소 농도 19.5% 이상 23.5% 미만, 탄산 가스의 농도 1.5% 미만, 일산화탄소 농도 30ppm 미만, 황화수소 농도 10ppm 미만)로 확인될 때까지 작업자의 출입을 제한하여야 한다.' },
+          { label:'긴급 통신장비 비치', content:'밀폐공간 내 작업자와 외부 감시인 사이에 상시 연락을 취할 수 있는 통신장비를 비치하도록 조치하여야 한다.' },
+          { label:'긴급구호장비의 비치 및 착용', content:'송기마스크, 호흡용 보호구, 사다리 및 구명줄 등 비상시에 작업자를 대피시키거나 구출하기 위해 필요한 기구를 비치하여야 한다.' },
+          { label:'작업 입회 및 밀폐공간 출입현황판 기록', content:'작업입회자를 선임하여야 한다. 작업입회자는 작업자가 밀폐공간 출입 시 반드시 입회하고, 출입현황판에 기록관리 하여야 한다.' },
+          { label:'환기', content:'송풍기를 설치하여 내부를 강제 환기하거나, 작업자에게 에어라인 또는 송기마스크를 착용시킨 후 작업하도록 하여야 한다.' },
+          { label:'조명', content:'작업 중 조명이 필요한 경우에는 저전압용 방폭등을 사용하도록 조치하여야 한다.' },
+          { label:'방폭형 공구의 사용', content:'인화성 물질 등으로 인한 화재 폭발의 위험이 있는 경우 작업자가 공기작동식 공구 또는 방폭형 공구를 사용하도록 한다.' },
+          { label:'구출 시 송기마스크 착용', content:'밀폐공간에 위급한 작업자를 구출하려는 자는 송기마스크 등을 착용하여야 한다.' },
+          { label:'출입의 통제', content:'작업이 완료되지 않은 채 당일 작업이 중단된 경우에는 경계로프, 출입금지 표지판 등을 밀폐공간 출입구에 부착하여 외부인의 출입을 통제하여야 한다.' }
         ]
       },
       general: {
         title: '🛠️ 일반위험작업 시 안전조치 사항',
         items: [
-          { label: '작업구역 설정', content: '일반위험작업 시 외부로부터 점화원 유입을 차단하기 위하여 작업구역을 설정하고, 통행 및 차량의 출입을 제한하여야 한다.' },
-          { label: '위험요인 제거', content: '압력, 온도 및 유해위험물질 등이 존재하는 공정 또는 부속설비의 점검, 수리, 해체 작업을 할 때는 압력방출, 냉각 및 내용물의 배출 등 위험요인을 제거한 후 안전하게 작업하도록 조치하여야 한다.' },
-          { label: '밸브차단 표지 부착', content: '일반위험작업 수행을 위해 밸브를 차단하거나 맹판을 설치할 때에는 차단밸브 및 맹판에 위험꼬리표를 부착하여 실수로 작동시키거나 제거하는 일이 없도록 한다.' },
-          { label: '유해위험물질 방출 및 처리', content: '배관 또는 용기 등의 내부에서 작업을 수행할 때는 배관 및 용기 내부의 물질을 완전히 비우고 세정하여야 한다.' }
+          { label:'작업구역 설정', content:'일반위험작업 시 외부로부터 점화원 유입을 차단하기 위하여 작업구역을 설정하고, 통행 및 차량의 출입을 제한하여야 한다.' },
+          { label:'위험요인 제거', content:'압력, 온도 및 유해위험물질 등이 존재하는 공정 또는 부속설비의 점검, 수리, 해체 작업을 할 때는 압력방출, 냉각 및 내용물의 배출 등 위험요인을 제거한 후 안전하게 작업하도록 조치하여야 한다.' },
+          { label:'밸브차단 표지 부착', content:'일반위험작업 수행을 위해 밸브를 차단하거나 맹판을 설치할 때에는 차단밸브 및 맹판에 위험꼬리표를 부착하여 실수로 작동시키거나 제거하는 일이 없도록 한다.' },
+          { label:'유해위험물질 방출 및 처리', content:'배관 또는 용기 등의 내부에서 작업을 수행할 때는 배관 및 용기 내부의 물질을 완전히 비우고 세정하여야 한다.' }
         ]
       },
       electric: {
         title: '⚡ 전기작업',
         items: [
-          { label: '회로 차단', content: '전기계통 작업 시에는 반드시 회로를 차단하여야 한다.' },
-          { label: '정전작업 원칙', content: '정전작업을 원칙으로 하되 절연용 보호구 착용, 활선작업용 기구 사용 등 안전조치를 취한 후 작업하여야 한다.' },
-          { label: '전원 차단 확인 및 위험꼬리표 부착', content: '전원이 차단되었음을 상호간 서로 확인하고 잠금 장치 설치 후 위험꼬리표를 부착하여야 한다.' },
-          { label: '잠금 열쇠 보관 및 기재사항', content: '스위치의 잠금 열쇠는 따로 시설부서 또는 작업수행부서에서 보관하고 위험꼬리표에는 작업명, 작업시간, 작업자 연락처 등을 기재하여야 한다.' },
-          { label: '타 설비 영향 차단', content: '해당 작업 중 타 설비 및 연관공정의 운전으로 인한 영향을 받지 않도록 필요한 안전 조치 및 위험꼬리표를 부착하여야 한다.' },
-          { label: '절연판 설치', content: '작업 시 바닥에 습기가 있거나 불결한 경우에는 절연판을 설치하는 등의 조치를 취해야 한다.' },
-          { label: '복장 점검', content: '작업자는 고압 전기회로 부근에서 작업 시에는 신발이나 옷에 습기가 없도록 하고 복장을 단정히 하여야 한다.' },
-          { label: '접지', content: '이중절연기구를 사용하거나, 그렇지 않은 경우에는 전기작업 전 접지를 하여야 한다.' },
-          { label: '잔류전하 제거', content: '잔류전하에 의한 위험이 우려되는 경우에는 잔류전하를 안전하게 제거하여야 한다.' },
-          { label: '작업 완료 통보 및 통전', content: '작업자는 작업이 완료되면 작업완료 사실을 알리고 작업수행부서 담당자는 앞의 3~4항 절차의 역순으로 통전하여야 한다.' }
+          { label:'회로 차단', content:'전기계통 작업 시에는 반드시 회로를 차단하여야 한다.' },
+          { label:'정전작업 원칙', content:'정전작업을 원칙으로 하되 절연용 보호구 착용, 활선작업용 기구 사용 등 안전조치를 취한 후 작업하여야 한다.' },
+          { label:'전원 차단 확인 및 위험꼬리표 부착', content:'전원이 차단되었음을 상호간 서로 확인하고 잠금 장치 설치 후 위험꼬리표를 부착하여야 한다.' },
+          { label:'잠금 열쇠 보관 및 기재사항', content:'스위치의 잠금 열쇠는 따로 시설부서 또는 작업수행부서에서 보관하고 위험꼬리표에는 작업명, 작업시간, 작업자 연락처 등을 기재하여야 한다.' },
+          { label:'타 설비 영향 차단', content:'해당 작업 중 타 설비 및 연관공정의 운전으로 인한 영향을 받지 않도록 필요한 안전 조치 및 위험꼬리표를 부착하여야 한다.' },
+          { label:'절연판 설치', content:'작업 시 바닥에 습기가 있거나 불결한 경우에는 절연판을 설치하는 등의 조치를 취해야 한다.' },
+          { label:'복장 점검', content:'작업자는 고압 전기회로 부근에서 작업 시에는 신발이나 옷에 습기가 없도록 하고 복장을 단정히 하여야 한다.' },
+          { label:'접지', content:'이중절연기구를 사용하거나, 그렇지 않은 경우에는 전기작업 전 접지를 하여야 한다.' },
+          { label:'잔류전하 제거', content:'잔류전하에 의한 위험이 우려되는 경우에는 잔류전하를 안전하게 제거하여야 한다.' },
+          { label:'작업 완료 통보 및 통전', content:'작업자는 작업이 완료되면 작업완료 사실을 알리고 작업수행부서 담당자는 앞의 3~4항 절차의 역순으로 통전하여야 한다.' }
         ]
       },
       height: {
         title: '🪜 고소작업',
         items: [
-          { label: '작업발판 설치', content: '추락의 위험이 있는 장소에는 비계설치 등 작업발판을 견고하게 설치하여야 한다.' },
-          { label: '안전대 착용', content: '그네식 이중고리 안전대를 착용하고, 안전대 부착설비에 안전고리를 걸고 작업하여야 한다.' },
-          { label: '개구부 방호 조치', content: '작업자가 추락할 위험이 있는 개구부에 추락방지를 위한 방호 조치를 하여야 한다.' },
-          { label: '공구 낙하 방지', content: '작업자는 작업 중 공구 등이 낙하하지 않도록 주의하여야 한다.' },
-          { label: '사다리 작업', content: '사다리 작업 시 최상단은 밟고 작업하지 않으며, 아웃 트리거를 설치하여야 한다.' }
+          { label:'작업발판 설치', content:'추락의 위험이 있는 장소에는 비계설치 등 작업발판을 견고하게 설치하여야 한다.' },
+          { label:'안전대 착용', content:'그네식 이중고리 안전대를 착용하고, 안전대 부착설비에 안전고리를 걸고 작업하여야 한다.' },
+          { label:'개구부 방호 조치', content:'작업자가 추락할 위험이 있는 개구부에 추락방지를 위한 방호 조치를 하여야 한다.' },
+          { label:'공구 낙하 방지', content:'작업자는 작업 중 공구 등이 낙하하지 않도록 주의하여야 한다.' },
+          { label:'사다리 작업', content:'사다리 작업 시 최상단은 밟고 작업하지 않으며, 아웃 트리거를 설치하여야 한다.' }
         ]
       }
     };
 
-    const safetyCategoryGrid = document.getElementById('safetyCategoryGrid');
+    const safetyCategoryGrid    = document.getElementById('safetyCategoryGrid');
     const safetyDetailContainer = document.getElementById('safetyDetailContainer');
-    const safetyDetailTitle = document.getElementById('safetyDetailTitle');
-    const safetyDetailContent = document.getElementById('safetyDetailContent');
-    const safetyBackBtn = document.getElementById('safetyBackBtn');
-    const safetySearch = document.getElementById('safetySearch');
-    const safetySearchBtn = document.getElementById('safetySearchBtn');
-    const safetySearchReset = document.getElementById('safetySearchReset');
-    const safetySearchResult = document.getElementById('safetySearchResult');
+    const safetyDetailTitle     = document.getElementById('safetyDetailTitle');
+    const safetyDetailContent   = document.getElementById('safetyDetailContent');
+    const safetyBackBtn         = document.getElementById('safetyBackBtn');
+    const safetySearch          = document.getElementById('safetySearch');
+    const safetySearchBtn       = document.getElementById('safetySearchBtn');
+    const safetySearchReset     = document.getElementById('safetySearchReset');
+    const safetySearchResult    = document.getElementById('safetySearchResult');
 
-    // 카테고리 선택
     document.querySelectorAll('.safety-category-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const category = btn.getAttribute('data-category');
-        if (category) showSafetyCategory(category);
+        const cat = btn.getAttribute('data-category');
+        if (cat) showSafetyCategory(cat);
       });
     });
 
     function showSafetyCategory(category) {
       const data = safetyData[category];
       if (!data) return;
-
       safetyDetailTitle.textContent = data.title;
-      safetyDetailContent.innerHTML = `
-        <div class="rule">
-          <ul>
-            ${data.items.map(item => `<li><strong>${escapeHtml(item.label)}:</strong> ${escapeHtml(item.content)}</li>`).join('')}
-          </ul>
-        </div>
-      `;
-
-      safetyCategoryGrid.style.display = 'none';
-      safetySearchResult.style.display = 'none';
+      safetyDetailContent.innerHTML = `<div class="rule"><ul>${data.items.map(item=>`<li><strong>${escapeHtml(item.label)}:</strong> ${escapeHtml(item.content)}</li>`).join('')}</ul></div>`;
+      safetyCategoryGrid.style.display    = 'none';
+      safetySearchResult.style.display    = 'none';
       safetyDetailContainer.style.display = 'block';
     }
 
     safetyBackBtn.addEventListener('click', () => {
-      safetyCategoryGrid.style.display = 'grid';
+      safetyCategoryGrid.style.display    = 'grid';
       safetyDetailContainer.style.display = 'none';
-      safetySearchResult.style.display = 'none';
-      safetySearchReset.style.display = 'none';
+      safetySearchResult.style.display    = 'none';
+      safetySearchReset.style.display     = 'none';
       safetySearch.value = '';
     });
 
-    // 검색 기능
     function searchSafety() {
       const query = safetySearch.value.trim();
       if (!query) {
         safetySearchResult.style.display = 'block';
-        safetySearchResult.textContent = '검색어를 입력해주세요.';
+        safetySearchResult.textContent   = '검색어를 입력해주세요.';
         safetyDetailContainer.style.display = 'none';
-        safetyCategoryGrid.style.display = 'grid';
+        safetyCategoryGrid.style.display    = 'grid';
         return;
       }
-
-      let results = [];
       const queryLower = query.toLowerCase();
-
-      Object.entries(safetyData).forEach(([catKey, catData]) => {
+      let results = [];
+      Object.entries(safetyData).forEach(([, catData]) => {
         catData.items.forEach(item => {
-          const labelLower = item.label.toLowerCase();
-          const contentLower = item.content.toLowerCase();
-          if (labelLower.includes(queryLower) || contentLower.includes(queryLower)) {
-            results.push({
-              category: catData.title,
-              label: item.label,
-              content: item.content
-            });
+          if (item.label.toLowerCase().includes(queryLower) || item.content.toLowerCase().includes(queryLower)) {
+            results.push({ category: catData.title, label: item.label, content: item.content });
           }
         });
       });
-
-      if (results.length === 0) {
+      if (!results.length) {
         safetySearchResult.style.display = 'block';
         safetySearchResult.innerHTML = `"${escapeHtml(query)}"에 대한 검색 결과가 없습니다.`;
-        safetyDetailContainer.style.display = 'none';
-        safetyCategoryGrid.style.display = 'grid';
-        safetySearchReset.style.display = 'inline-flex';
+        safetyDetailContainer.style.display = 'none'; safetyCategoryGrid.style.display = 'grid'; safetySearchReset.style.display = 'inline-flex';
       } else {
         safetySearchResult.style.display = 'block';
         safetySearchResult.innerHTML = `🔍 총 <strong>${results.length}개</strong>의 항목을 찾았습니다.`;
-
         safetyDetailTitle.textContent = `검색 결과: "${query}"`;
-        safetyDetailContent.innerHTML = results.map(r => `
-          <div class="rule">
-            <h3>${escapeHtml(r.category)}</h3>
-            <ul>
-              <li><strong>${escapeHtml(r.label)}:</strong> ${escapeHtml(r.content)}</li>
-            </ul>
-          </div>
-        `).join('');
-
-        safetyCategoryGrid.style.display = 'none';
-        safetyDetailContainer.style.display = 'block';
-        safetySearchReset.style.display = 'inline-flex';
+        safetyDetailContent.innerHTML = results.map(r=>`<div class="rule"><h3>${escapeHtml(r.category)}</h3><ul><li><strong>${escapeHtml(r.label)}:</strong> ${escapeHtml(r.content)}</li></ul></div>`).join('');
+        safetyCategoryGrid.style.display = 'none'; safetyDetailContainer.style.display = 'block'; safetySearchReset.style.display = 'inline-flex';
       }
     }
-
     safetySearchBtn.addEventListener('click', searchSafety);
-    safetySearch.addEventListener('keydown', (e) => { if (e.key === 'Enter') searchSafety(); });
-
+    safetySearch.addEventListener('keydown', e => { if (e.key==='Enter') searchSafety(); });
     safetySearchReset.addEventListener('click', () => {
-      safetySearch.value = '';
-      safetyCategoryGrid.style.display = 'grid';
-      safetyDetailContainer.style.display = 'none';
-      safetySearchResult.style.display = 'none';
-      safetySearchReset.style.display = 'none';
+      safetySearch.value = ''; safetyCategoryGrid.style.display = 'grid';
+      safetyDetailContainer.style.display = 'none'; safetySearchResult.style.display = 'none'; safetySearchReset.style.display = 'none';
     });
 
-    /********************************************************
-     * 5) 근로자 의견 청취
-     ********************************************************/
-    const opinionCategory = document.getElementById('opinionCategory');
-    const opinionTitle = document.getElementById('opinionTitle');
-    const opinionContent = document.getElementById('opinionContent');
-    const opinionName = document.getElementById('opinionName');
-    const opinionPhone = document.getElementById('opinionPhone');
+    /***********************************************
+     * 6) 근로자 의견 청취
+     ***********************************************/
     const opinionBtn = document.getElementById('opinionBtn');
-    const opinionOk = document.getElementById('opinionOk');
+    const opinionOk  = document.getElementById('opinionOk');
     const opinionErr = document.getElementById('opinionErr');
 
-    function showOpinionOk(msg){
-      opinionOk.textContent = msg || "의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다.";
-      opinionOk.style.display = 'block';
-      opinionErr.style.display = 'none';
-    }
-    function showOpinionErr(msg){
-      opinionErr.textContent = "전송 실패: " + (msg || "알 수 없는 오류");
-      opinionErr.style.display = 'block';
-      opinionOk.style.display = 'none';
-    }
-
-    function submitOpinion() {
-      opinionOk.style.display = 'none';
-      opinionErr.style.display = 'none';
-
+    opinionBtn.addEventListener('click', () => {
+      opinionOk.style.display = 'none'; opinionErr.style.display = 'none';
       const payload = {
-        category: opinionCategory.value.trim(),
-        title: opinionTitle.value.trim(),
-        content: opinionContent.value.trim(),
-        name: opinionName.value.trim(),
-        phone: opinionPhone.value.trim(),
+        category: document.getElementById('opinionCategory').value.trim(),
+        title:    document.getElementById('opinionTitle').value.trim(),
+        content:  document.getElementById('opinionContent').value.trim(),
+        name:     document.getElementById('opinionName').value.trim(),
+        phone:    document.getElementById('opinionPhone').value.trim(),
       };
-
       if (!payload.category || !payload.title || !payload.content) {
-        showOpinionErr("필수 항목(유형/제목/내용)을 입력해 주세요.");
-        return;
+        opinionErr.textContent = '전송 실패: 필수 항목(유형/제목/내용)을 입력해 주세요.';
+        opinionErr.style.display = 'block'; return;
       }
-
-      opinionBtn.disabled = true;
-      opinionBtn.textContent = "전송 중...";
-
-      // 데모: 1초 후 완료 처리
+      opinionBtn.disabled = true; opinionBtn.textContent = '전송 중...';
       setTimeout(() => {
-        showOpinionOk("✅ 의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다.");
-
-        console.log('=== 근로자 의견 청취 데이터 ===');
-        console.log('의견 유형:', payload.category);
-        console.log('제목:', payload.title);
-        console.log('내용:', payload.content);
-        console.log('작성자:', payload.name || '(익명)');
-        console.log('연락처:', payload.phone || '(없음)');
-        console.log('==============================');
-
-        opinionCategory.value = "";
-        opinionTitle.value = "";
-        opinionContent.value = "";
-        opinionName.value = "";
-        opinionPhone.value = "";
-
-        opinionBtn.disabled = false;
-        opinionBtn.textContent = "의견 제출 📝";
+        opinionOk.textContent = '✅ 의견이 접수되었습니다. 검토 후 개선에 반영하겠습니다.';
+        opinionOk.style.display = 'block';
+        ['opinionCategory','opinionTitle','opinionContent','opinionName','opinionPhone'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el.tagName === 'SELECT') el.value = ''; else el.value = '';
+        });
+        opinionBtn.disabled = false; opinionBtn.textContent = '의견 제출 📝';
       }, 1000);
-    }
-
-    opinionBtn.addEventListener('click', submitOpinion);
+    });
   </script>
 </body>
 </html>
